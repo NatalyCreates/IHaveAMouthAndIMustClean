@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
         {
             lastRoundStartedTime = (int)Time.time;
             timePlayedThisRound = 0;
-            Helper.Instance.Print("time over");
+            //Helper.Instance.Print("time over");
             EndGame(true);
             // stop game
             Application.Quit();
@@ -77,13 +77,17 @@ public class GameManager : MonoBehaviour {
             GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
             foreach (GameObject area in allTeeth)
             {
-                if (area == null) { Debug.Log("IHAMAIMC area is null"); }
-                Debug.Log("IHAMAIMC area name:  " + area.name);
+                //if (area == null) { Debug.Log("IHAMAIMC area is null"); }
+                //Debug.Log("IHAMAIMC area name:  " + area.name);
                 area.GetComponent<ToothState>().resetToothState();
             }
             //reset timer
+            lastRoundStartedTime = (int)Time.time;
+            timePlayedThisRound = 0;
+            //reset cooldown bar to the new level clickCooldownTime
+            GermPlayer.Instance.reset();
             //set brush speed to 0
-            //
+            
         }
     }
 

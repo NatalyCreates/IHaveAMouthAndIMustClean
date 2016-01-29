@@ -114,8 +114,10 @@ public class ToothState : MonoBehaviour {
     // reset me func (max hp etc)
     internal void resetToothState ()
     {
+        //Debug.Log("IHAMAIMC germification in reset " + germification.ToString());
         hp = Settings.Instance.maxToothAreaHp;
         germification = 0f;
+        //Debug.Log("IHAMAIMC germification after reset " + germification.ToString());
     }
 
 
