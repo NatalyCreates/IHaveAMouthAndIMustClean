@@ -3,8 +3,8 @@ using System.Collections;
 
 public class ToothState : MonoBehaviour {
 
-    internal int hp = 100;
-    internal int germification = 0;
+    internal float hp = 1f;
+    internal float germification = 0f;
     
 
     public enum PrefBrushDir { UpDown, LeftRight };

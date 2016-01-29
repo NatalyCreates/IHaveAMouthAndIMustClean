@@ -16,10 +16,12 @@ public class Cavity : MonoBehaviour {
 
         // Update from parent's HP
 
-        //Helper.Instance.Print("ToothState HP: " + gameObject.GetComponentInParent<ToothState>().hp.ToString());
         float hp = gameObject.GetComponentInParent<ToothState>().hp;
+
         Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
-        tmp.a = (100 - hp) / 100 * maxOpacityLooksGood;
+        if (hp < 0) hp = 0f;
+        if (hp > 1.0f) hp = 1f;
+        tmp.a = (1 - hp) * maxOpacityLooksGood;
         gameObject.GetComponent<SpriteRenderer>().color = tmp;
 
 

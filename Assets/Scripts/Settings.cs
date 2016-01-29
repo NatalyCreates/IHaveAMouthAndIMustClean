@@ -74,10 +74,10 @@ public class Settings : MonoBehaviour {
         movingCleaningEfficiency[2] = 0.07f;
 
         percentageGermAppears = new float[4];
-        percentageGermAppears[0] = 1;
-        percentageGermAppears[1] = 40;
-        percentageGermAppears[2] = 70;
-        percentageGermAppears[3] = 100;
+        percentageGermAppears[0] = 0.01f;
+        percentageGermAppears[1] = 0.4f;
+        percentageGermAppears[2] = 0.7f;
+        percentageGermAppears[3] = 1.0f;
 
     }
 	
