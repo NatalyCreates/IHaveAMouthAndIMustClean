@@ -13,13 +13,16 @@ public class ToothState : MonoBehaviour {
     public enum PrefBrushDir { UpDown, LeftRight };
     public PrefBrushDir prefDir = PrefBrushDir.LeftRight;
 
-
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         // every frame that we are touching this
 
+        //Debug.Log("YAAAAAAAAAY3 " + other.gameObject.name);
+
         if (other.gameObject.tag == "brush")
         {
+            Debug.Log("Got Brushed!");
+
             if (BrushPlayer.Instance.direction.sqrMagnitude > 0)
             {
                 x_part = Mathf.Pow((BrushPlayer.Instance.direction.x), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
