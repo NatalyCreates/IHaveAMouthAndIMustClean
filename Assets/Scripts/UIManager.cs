@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour {
         germScoreText = GameObject.FindGameObjectWithTag("germ_score_text").GetComponent<Text>();
 
         cooldownBar = GameObject.FindGameObjectWithTag("cooldown_bar_fill").GetComponent<Image>();
-        //efficiencyBar = GameObject.FindGameObjectWithTag("efficiency_bar_fill").GetComponent<Image>();
+        efficiencyBar = GameObject.FindGameObjectWithTag("efficiency_bar_fill").GetComponent<Image>();
 
 
 
@@ -43,8 +43,8 @@ public class UIManager : MonoBehaviour {
         if (fillCooldown > 1f) fillCooldown = 1f;
         cooldownBar.fillAmount = fillCooldown;
 
-        //float fillEfficiency = 0.03f + 0.5f;
-        //if (fillEfficiency > 1f) fillCooldown = 1f;
-        //efficiencyBar.fillAmount = fillEfficiency;
+        float fillEfficiency = 0.03f + 0.5f;
+        if (fillEfficiency > 1f) fillCooldown = 1f;
+        efficiencyBar.fillAmount = fillEfficiency;
     }
 }
