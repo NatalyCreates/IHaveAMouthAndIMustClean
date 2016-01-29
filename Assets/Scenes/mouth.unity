@@ -676,7 +676,6 @@ MonoBehaviour:
   winScore: 3
   percentageGermAppears: []
   maxToothAreaHp: 100
-  dmgPerSecAtMaxGermification: 0
   secondsUntilCavityAtMaxGerms: 
   numClicksUntilMaxGerms: 
   rateOfMultiplicationPerSecondPerGermification: .100000001
@@ -849,7 +848,7 @@ GameObject:
   - 4: {fileID: 1447539098}
   m_Layer: 0
   m_Name: AllTeeth
-  m_TagString: all_teeth
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
