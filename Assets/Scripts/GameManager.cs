@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
             lastRoundStartedTime = (int)Time.time;
             timePlayedThisRound = 0;
             Helper.Instance.Print("time over");
+            EndGame(true);
             // stop game
             Application.Quit();
         }
@@ -46,6 +47,35 @@ public class GameManager : MonoBehaviour {
 
         // count until max round time and check winner
 
+    }
+
+    public void EndGame (bool brushWins)
+    {
+        if (brushWins)
+        {
+            brushPlayerScore += 1;
+        }
+        else
+        {
+            germPlayerScore += 1;
+        }
+
+        // show UI and animation of endgam
+
+        if (brushPlayerScore > 3)
+        {
+            // brush won overall
+            // back to menu screen
+        }
+        if (germPlayerScore > 3)
+        {
+            // germs won overall
+            // back to menu screen
+        }
+        else
+        {
+            // go to next round
+        }
     }
 
     // endgame (call func if cavity or if time out) with winner flag

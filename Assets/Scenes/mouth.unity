@@ -314,7 +314,7 @@ GameObject:
   - 114: {fileID: 757031905}
   m_Layer: 5
   m_Name: ToothbrushScore
-  m_TagString: Untagged
+  m_TagString: brush_score_text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -527,7 +527,7 @@ GameObject:
   - 114: {fileID: 1384163453}
   m_Layer: 5
   m_Name: GermScore
-  m_TagString: Untagged
+  m_TagString: germ_score_text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

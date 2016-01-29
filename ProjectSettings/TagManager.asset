@@ -6,6 +6,8 @@ TagManager:
   tags:
   - brush
   - timer_text
+  - brush_score_text
+  - germ_score_text
   layers:
   - Default
   - TransparentFX
