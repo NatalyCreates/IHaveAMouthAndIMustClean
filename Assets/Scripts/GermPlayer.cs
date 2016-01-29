@@ -18,6 +18,14 @@ public class GermPlayer : MonoBehaviour {
         clickCooldownTime = Settings.Instance.germClickCooldownTime[germ_level];
         //float dmgPerSecAtMaxGermification = maxToothAreaHp / secondsUntilCavityAtMaxGerms;
 
+        //// HERE
+        GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
+        foreach (GameObject area in allTeeth)
+        {
+            // call the reset
+        }
+        //// HERE
+
     }
 
     void Awake()
@@ -32,7 +40,10 @@ public class GermPlayer : MonoBehaviour {
         {
             cooldown += Time.deltaTime;
         }
-         
-
 	}
+
+    void Reset()
+    {
+        // clickCooldownTime update to correct time according to level
+    }
 }
