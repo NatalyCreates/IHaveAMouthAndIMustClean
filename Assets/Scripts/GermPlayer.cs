@@ -11,16 +11,9 @@ public class GermPlayer : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        cooldown = 0f;
-        int germ_level = GameManager.Instance.brushPlayerScore;
-        //Helper.Instance.Print(germ_level.ToString());
-        //germ_level = 0;
-        clickCooldownTime = Settings.Instance.germClickCooldownTime[germ_level];
+        reset();
         //float dmgPerSecAtMaxGermification = maxToothAreaHp / secondsUntilCavityAtMaxGerms;
 
-        //// HERE
-
-        //// HERE
 
     }
 
@@ -38,8 +31,10 @@ public class GermPlayer : MonoBehaviour {
         }
 	}
 
-    void Reset()
+    internal void reset()
     {
         // clickCooldownTime update to correct time according to level
+        cooldown = 0f;
+        clickCooldownTime = Settings.Instance.germClickCooldownTime[GameManager.Instance.brushPlayerScore];
     }
 }

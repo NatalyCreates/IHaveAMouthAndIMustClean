@@ -17,7 +17,7 @@ public class Settings : MonoBehaviour {
     //public float percentageGerm3Appears = 70;
     //public float percentageGerm4Appears = 100;
 
-    public float maxToothAreaHp = 1f;
+    internal float maxToothAreaHp = 1f;
 
     internal float dmgPerSecAtMaxGermification = (1.0f/15.0f);
     //public float dmgPerSecAtMaxGermification = 1;
