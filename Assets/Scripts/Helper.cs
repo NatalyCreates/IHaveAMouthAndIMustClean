@@ -12,7 +12,7 @@ public class Helper : MonoBehaviour {
 
     public void Print (string text)
     {
-        Debug.Log("IHAMAIMC" + text);
+        Debug.Log("IHAMAIMC " + text);
     }
 
 	// Use this for initialization

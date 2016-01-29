@@ -5,12 +5,15 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance;
 
-    internal int brushPlayerScore;
-    internal int germPlayerScore;
+    internal int brushPlayerScore = 0;
+    internal int germPlayerScore = 0;
 
-    internal float timePlayedThisRound;
+    internal int timePlayedThisRound = 0;
+    internal int lastRoundStartedTime = 0;
 
-    internal int roundNumber;
+    internal int timeLeftThisRound = 0;
+
+    internal int roundNumber = 1;
 
     void Awake()
     {
@@ -19,11 +22,28 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+        timePlayedThisRound = (int)Time.time - lastRoundStartedTime;
+        //Helper.Instance.Print("timePlayedThisRound = " + timePlayedThisRound.ToString());
+        //Helper.Instance.Print("lastRoundStartedTime = " + lastRoundStartedTime.ToString());
+        //Helper.Instance.Print("roundTime = " + Settings.Instance.roundTime.ToString());
+        
+        if (timePlayedThisRound >= Settings.Instance.roundTime + 1)
+        {
+            lastRoundStartedTime = (int)Time.time;
+            timePlayedThisRound = 0;
+            Helper.Instance.Print("time over");
+            // stop game
+            Application.Quit();
+        }
+
+        timeLeftThisRound = Settings.Instance.roundTime - timePlayedThisRound;
+
         // count until max round time and check winner
 
     }

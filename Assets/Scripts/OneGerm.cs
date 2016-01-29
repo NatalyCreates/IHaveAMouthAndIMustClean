@@ -16,7 +16,7 @@ public class OneGerm : MonoBehaviour {
         // if ToothArea which is my parent reaches X percent of germification, show me
         // get appropriate X percentage from settings according to germNum
 
-        Helper.Instance.Print("ToothState Germification: " + gameObject.GetComponentInParent<ToothState>().germification.ToString());
+        //Helper.Instance.Print("ToothState Germification: " + gameObject.GetComponentInParent<ToothState>().germification.ToString());
 
         float germ = gameObject.GetComponentInParent<ToothState>().germification;
         
