@@ -77,8 +77,13 @@ public class GameManager : MonoBehaviour {
             GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
             foreach (GameObject area in allTeeth)
             {
+                if (area == null) { Debug.Log("IHAMAIMC area is null"); }
+                Debug.Log("IHAMAIMC area name:  " + area.name);
                 area.GetComponent<ToothState>().resetToothState();
             }
+            //reset timer
+            //set brush speed to 0
+            //
         }
     }
 

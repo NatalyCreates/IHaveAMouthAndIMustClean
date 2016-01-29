@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11474476}
   m_Layer: 0
   m_Name: ToothAreaMid
-  m_TagString: Untagged
+  m_TagString: all_teeth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,6 +413,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: prefDir
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: all_teeth
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
