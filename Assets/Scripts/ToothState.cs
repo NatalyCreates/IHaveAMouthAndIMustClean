@@ -48,7 +48,9 @@ public class ToothState : MonoBehaviour {
         Debug.Log("germification after cleaning " + germification.ToString());
 
         //report toothAreaEfficiency to BrushPlayer
-        BrushPlayer.Instance.AddAreaToCount(toothAreaEfficiency);
+        //Don't report - brushplayer asks us instead.
+        //BrushPlayer.Instance.AddAreaToCount(toothAreaEfficiency);
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -66,12 +68,12 @@ public class ToothState : MonoBehaviour {
         {
             Debug.Log("Got UnBrushed!");
             isBeingBrushed = false;
+            toothAreaEfficiency = 0;
         }
     }
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         hp = Settings.Instance.maxToothAreaHp;
         //Debug.Log("IHAMAIMC initial hp " + hp.ToString());
     }

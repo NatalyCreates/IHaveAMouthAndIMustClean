@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class BrushPlayer : MonoBehaviour {
@@ -12,6 +13,9 @@ public class BrushPlayer : MonoBehaviour {
     internal int speed;
 
     internal float efficiency;
+    internal float cur_efficiency;
+    internal int non_zero_efficiencies;
+    internal float total_efficiency;
 
     internal float[] affectedToothAreasEfficiencies;
 
@@ -53,14 +57,25 @@ public class BrushPlayer : MonoBehaviour {
         //Update movement according to 
 
         // Calculate Average Efficiency on all Tooth Areas that have reported
-
-
+        cur_efficiency = 0f;
+        total_efficiency = 0f;
+        non_zero_efficiencies = 0;
+        GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
+        foreach (GameObject area in allTeeth)
+        {
+            cur_efficiency = area.GetComponent<ToothState>().toothAreaEfficiency;
+            if (cur_efficiency != 0) {
+                non_zero_efficiencies += 1;
+                total_efficiency += cur_efficiency;
+            }
+        }
+        efficiency = total_efficiency / non_zero_efficiencies;
     }
 
-    public void AddAreaToCount(float efficiency)
-    {
-        // adds to the list
-    }
+//    public void AddAreaToCount(float efficiency)
+//    {
+//        // adds to the list
+//    }
 
 
 
