@@ -5,7 +5,10 @@ public class ToothState : MonoBehaviour {
 
     internal float hp = 1f;
     internal float germification = 0f;
-    
+    internal float x_part = 0f;
+    internal float y_part = 0f;
+    internal float toothAreaEfficiency = 0f;
+
 
     public enum PrefBrushDir { UpDown, LeftRight };
     public PrefBrushDir prefDir = PrefBrushDir.LeftRight;
@@ -17,13 +20,40 @@ public class ToothState : MonoBehaviour {
 
         if (other.gameObject.tag == "brush")
         {
-            //direction
+            x_part = Mathf.Pow((BrushPlayer.Instance.direction.x), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
+            y_part = Mathf.Pow((BrushPlayer.Instance.direction.y), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
+            Debug.Log("IHAMAIMC x_part " + x_part.ToString());
+            Debug.Log("IHAMAIMC y_part " + y_part.ToString());
+
+            if (PrefBrushDir.LeftRight == prefDir) {
+                toothAreaEfficiency = x_part + (y_part * Settings.Instance.inefficientCleaningCoefficient);
+            }
+            else if (PrefBrushDir.UpDown == prefDir)
+            {
+                toothAreaEfficiency = y_part + (x_part * Settings.Instance.inefficientCleaningCoefficient);
+            }
+            else
+            {
+                Debug.Log("toothAreaEfficiency is wrong!");
+            }
+            toothAreaEfficiency= BrushPlayer.Instance.fractionOfMaxSpeed * toothAreaEfficiency;
+            Debug.Log("toothAreaEfficiency " + toothAreaEfficiency.ToString());
+
+            //Brush level = germ score.
+            germification = germification - toothAreaEfficiency * Settings.Instance.movingCleaningEfficiency[GameManager.Instance.germPlayerScore] * Time.deltaTime;
+            Debug.Log("germification after cleaning " + germification.ToString());
+
+            //report toothAreaEfficiency to BrushPlayer
+            BrushPlayer.Instance.AddAreaToCount(toothAreaEfficiency);
+
         }
+
     }
 
 	// Use this for initialization
 	void Start () {
         hp = Settings.Instance.maxToothAreaHp;
+        //Debug.Log("IHAMAIMC initial hp " + hp.ToString());
     }
 	
     void OnMouseDown()
@@ -44,7 +74,7 @@ public class ToothState : MonoBehaviour {
 
         // Germ multiplication
 
-        germification = germification * Settings.Instance.rateOfMultiplicationPerSecondPerGermification * Time.deltaTime;
+        germification = germification * (1 + (Settings.Instance.rateOfMultiplicationPerSecondPerGermification * Time.deltaTime));
 
         //Check that germification isn't more than max.
         if (germification > 1f)
@@ -52,12 +82,17 @@ public class ToothState : MonoBehaviour {
             germification = 1f;
         }
 
+        Debug.Log("IHAMAIMC germification " + germification.ToString());
+        Debug.Log("IHAMAIMC rate const " + Settings.Instance.dmgPerSecAtMaxGermification.ToString());
+
         // Update damage from germs
 
-        hp = hp - germification * Settings.Instance.dmgPerSecAtMaxGermification;
+        hp = hp - (germification * Settings.Instance.dmgPerSecAtMaxGermification * Time.deltaTime);
+        //hp = hp - (germification * 1 * Time.deltaTime);
+        Debug.Log("IHAMAIMC hp " + hp.ToString());
         if (hp <= 0)
         {
-            //GameManager.Instance.EndGame(false);
+            GameManager.Instance.EndGame(false);
         }
 
 
