@@ -19,11 +19,7 @@ public class GermPlayer : MonoBehaviour {
         //float dmgPerSecAtMaxGermification = maxToothAreaHp / secondsUntilCavityAtMaxGerms;
 
         //// HERE
-        GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
-        foreach (GameObject area in allTeeth)
-        {
-            // call the reset
-        }
+
         //// HERE
 
     }

@@ -74,12 +74,16 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            // go to next round
+            GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
+            foreach (GameObject area in allTeeth)
+            {
+                area.GetComponent<ToothState>().resetToothState();
+            }
         }
     }
 
-    // endgame (call func if cavity or if time out) with winner flag
-    // also check if someone reached 3 wins, if yes, final winner show
-    // level up the loser
-    // reset the whole game
+    // endgame (call func if cavity or if time out) with winner flag -done
+    // also check if someone reached 3 wins, if yes, final winner show - done
+    // level up the loser - not needed
+    // reset the whole game - ????
 }
