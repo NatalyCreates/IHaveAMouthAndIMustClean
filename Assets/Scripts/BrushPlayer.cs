@@ -9,7 +9,8 @@ public class BrushPlayer : MonoBehaviour {
 
     internal float fractionOfMaxSpeed = 0;
     internal Vector2 direction = Vector2.zero;
-    //int level; - take level from the score of the germ player at game manager
+    internal Vector2 direction_normalized;
+    internal float curMaxSpeed;
     internal int speed;
 
     internal float efficiency;
@@ -34,8 +35,19 @@ public class BrushPlayer : MonoBehaviour {
 
         // If no movement, move slightly or play idle anim, and flag to prevent effect on teeth
 
-        // Control Brush Movement
+        direction.x = Input.GetAxis("Horizontal");
+        direction.y = Input.GetAxis("Vertical");
+        direction_normalized = direction.normalized;
+        Debug.Log("IHAMAIMC direction vector " + direction.ToString());
 
+        curMaxSpeed = Settings.Instance.maxSpeedBrush[GameManager.Instance.germPlayerScore];
+        transform.Translate(direction_normalized.x * curMaxSpeed * Time.deltaTime, direction_normalized.y * curMaxSpeed * Time.deltaTime, 0);
+
+        //fractionOfMaxSpeed = ???? / curMaxSpeed;
+        fractionOfMaxSpeed = 1;
+
+        // Control Brush Movement
+        /*
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             //gameObject.transform.position = gameObject.transform.position + Vector3.right;
@@ -53,6 +65,7 @@ public class BrushPlayer : MonoBehaviour {
         {
             direction = Vector2.down;
         }
+        */
 
         //Update movement according to 
 

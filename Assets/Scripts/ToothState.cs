@@ -17,6 +17,7 @@ public class ToothState : MonoBehaviour {
 
     void brushMe()
     {
+        Debug.Log("toothAreaEfficiency " + BrushPlayer.Instance.direction.sqrMagnitude.ToString());
         if ((BrushPlayer.Instance.direction.sqrMagnitude > 0) && (germification > 0))
         {
             x_part = Mathf.Pow((BrushPlayer.Instance.direction.x), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
