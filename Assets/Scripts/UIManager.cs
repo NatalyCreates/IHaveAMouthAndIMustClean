@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
     public static UIManager Instance;
 
     Text timerText, brushScoreText, germScoreText;
+    Image efficiencyBar, cooldownBar;
 
     void Awake ()
     {
@@ -20,6 +21,11 @@ public class UIManager : MonoBehaviour {
 
         brushScoreText = GameObject.FindGameObjectWithTag("brush_score_text").GetComponent<Text>();
         germScoreText = GameObject.FindGameObjectWithTag("germ_score_text").GetComponent<Text>();
+
+        cooldownBar = GameObject.FindGameObjectWithTag("power_bar_fill").GetComponent<Image>();
+
+
+
     }
 	
 	// Update is called once per frame
@@ -31,5 +37,7 @@ public class UIManager : MonoBehaviour {
 
         brushScoreText.text = GameManager.Instance.brushPlayerScore.ToString();
         germScoreText.text = GameManager.Instance.germPlayerScore.ToString();
+
+        cooldownBar.fillAmount = GermPlayer.Instance.cooldown / GermPlayer.Instance.clickCooldownTime;
     }
 }

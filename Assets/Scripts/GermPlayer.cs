@@ -32,7 +32,10 @@ public class GermPlayer : MonoBehaviour {
         {
             cooldown += Time.deltaTime;
         }
-         
-
 	}
+
+    void Reset()
+    {
+        // clickCooldownTime update to correct time according to level
+    }
 }
