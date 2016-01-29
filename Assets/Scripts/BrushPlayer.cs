@@ -5,10 +5,10 @@ using System.Collections;
 public class BrushPlayer : MonoBehaviour {
 
     public static BrushPlayer Instance;
-    
-    float fractionOfMaxSpeed = 0;
-    Vector2 direction = Vector2.zero;
-    int level;
+
+    internal float fractionOfMaxSpeed = 0;
+    internal Vector2 direction = Vector2.zero;
+    //int level; - take level from the score of the germ player at game manager
     internal int speed;
 
     internal float efficiency;

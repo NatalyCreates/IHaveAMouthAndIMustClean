@@ -16,9 +16,9 @@ public class Settings : MonoBehaviour {
     public float percentageGerm3Appears = 70;
     public float percentageGerm4Appears = 100;
 
-    public int maxToothAreaHp = 100;
+    public float maxToothAreaHp = 1f;
 
-    public float dmgPerSecAtMaxGermification;
+    public float dmgPerSecAtMaxGermification = (1f/15f);
 
     public int[] secondsUntilCavityAtMaxGerms;
     public int[] numClicksUntilMaxGerms;
@@ -37,10 +37,6 @@ public class Settings : MonoBehaviour {
     void Awake ()
     {
         Instance = this;
-    }
-
-    // Use this for initialization
-    void Start () {
 
         secondsUntilCavityAtMaxGerms = new int[3];
         secondsUntilCavityAtMaxGerms[0] = 15;
@@ -71,6 +67,13 @@ public class Settings : MonoBehaviour {
         movingCleaningEfficiency[0] = 0.05f;
         movingCleaningEfficiency[1] = 0.06f;
         movingCleaningEfficiency[2] = 0.07f;
+
+    }
+
+    // Use this for initialization
+    void Start () {
+
+        
 
     }
 	
