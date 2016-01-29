@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Settings : MonoBehaviour {
 
-    public Settings Instance;
+    public static Settings Instance;
 
     public int roundTime;
 
@@ -23,7 +23,7 @@ public class Settings : MonoBehaviour {
     public int[] secondsUntilCavityAtMaxGerms;
     public int[] numClicksUntilMaxGerms;
 
-    public float rateOfMultiplicationPerSecondPerGermification = 0.1;
+    public float rateOfMultiplicationPerSecondPerGermification = 0.1f;
 
     public int[] maxSpeedBrush;
 

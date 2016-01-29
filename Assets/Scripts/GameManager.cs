@@ -3,12 +3,19 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager Instance;
+
     internal int brushPlayerScore;
     internal int germPlayerScore;
 
     internal float timePlayedThisRound;
 
     internal int roundNumber;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     // Use this for initialization
     void Start () {

@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Helper : MonoBehaviour {
 
-    public Helper Instance;
+    public static Helper Instance;
 
-    void Awake ()
+    void Awake()
     {
         Instance = this;
     }

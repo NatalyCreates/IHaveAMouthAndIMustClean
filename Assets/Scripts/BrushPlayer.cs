@@ -4,6 +4,7 @@ using System.Collections;
 
 public class BrushPlayer : MonoBehaviour {
 
+    public static BrushPlayer Instance;
     
     float fractionOfMaxSpeed = 0;
     Vector2 direction = Vector2.zero;
@@ -13,11 +14,14 @@ public class BrushPlayer : MonoBehaviour {
     internal float efficiency;
 
     internal float[] affectedToothAreasEfficiencies;
-    
-    
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 

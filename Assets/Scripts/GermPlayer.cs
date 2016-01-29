@@ -3,10 +3,17 @@ using System.Collections;
 
 public class GermPlayer : MonoBehaviour {
 
+    public static GermPlayer Instance;
+
     internal int cooldown;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
         // cooldown = 0
         //float dmgPerSecAtMaxGermification = maxToothAreaHp / secondsUntilCavityAtMaxGerms;
 
