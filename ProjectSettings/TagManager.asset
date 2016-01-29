@@ -9,7 +9,9 @@ TagManager:
   - brush_score_text
   - germ_score_text
   - germ_ref
-  - power_bar_fill
+  - cooldown_bar_fill
+  - efficiency_bar_fill
+  - all_teeth
   layers:
   - Default
   - TransparentFX

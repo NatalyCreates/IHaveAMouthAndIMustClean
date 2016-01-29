@@ -22,7 +22,8 @@ public class UIManager : MonoBehaviour {
         brushScoreText = GameObject.FindGameObjectWithTag("brush_score_text").GetComponent<Text>();
         germScoreText = GameObject.FindGameObjectWithTag("germ_score_text").GetComponent<Text>();
 
-        cooldownBar = GameObject.FindGameObjectWithTag("power_bar_fill").GetComponent<Image>();
+        cooldownBar = GameObject.FindGameObjectWithTag("cooldown_bar_fill").GetComponent<Image>();
+        //efficiencyBar = GameObject.FindGameObjectWithTag("efficiency_bar_fill").GetComponent<Image>();
 
 
 
@@ -38,6 +39,12 @@ public class UIManager : MonoBehaviour {
         brushScoreText.text = GameManager.Instance.brushPlayerScore.ToString();
         germScoreText.text = GameManager.Instance.germPlayerScore.ToString();
 
-        cooldownBar.fillAmount = GermPlayer.Instance.cooldown / GermPlayer.Instance.clickCooldownTime;
+        float fillCooldown = 0.03f + GermPlayer.Instance.cooldown / GermPlayer.Instance.clickCooldownTime;
+        if (fillCooldown > 1f) fillCooldown = 1f;
+        cooldownBar.fillAmount = fillCooldown;
+
+        //float fillEfficiency = 0.03f + 0.5f;
+        //if (fillEfficiency > 1f) fillCooldown = 1f;
+        //efficiencyBar.fillAmount = fillEfficiency;
     }
 }
