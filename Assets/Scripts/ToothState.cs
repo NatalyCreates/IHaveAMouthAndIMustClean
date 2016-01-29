@@ -13,49 +13,62 @@ public class ToothState : MonoBehaviour {
     public enum PrefBrushDir { UpDown, LeftRight };
     public PrefBrushDir prefDir = PrefBrushDir.LeftRight;
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        // every frame that we are touching this
+    bool isBeingBrushed = false;
 
+    void brushMe()
+    {
+        if (BrushPlayer.Instance.direction.sqrMagnitude > 0)
+        {
+            x_part = Mathf.Pow((BrushPlayer.Instance.direction.x), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
+            y_part = Mathf.Pow((BrushPlayer.Instance.direction.y), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
+            Debug.Log("IHAMAIMC x_part " + x_part.ToString());
+            Debug.Log("IHAMAIMC y_part " + y_part.ToString());
+
+            if (PrefBrushDir.LeftRight == prefDir)
+            {
+                toothAreaEfficiency = x_part + (y_part * Settings.Instance.inefficientCleaningCoefficient);
+            }
+            else if (PrefBrushDir.UpDown == prefDir)
+            {
+                toothAreaEfficiency = y_part + (x_part * Settings.Instance.inefficientCleaningCoefficient);
+            }
+            else
+            {
+                Debug.Log("toothAreaEfficiency is wrong!");
+            }
+            toothAreaEfficiency = BrushPlayer.Instance.fractionOfMaxSpeed * toothAreaEfficiency;
+
+        }
+        else { toothAreaEfficiency = 0; }
+
+        Debug.Log("toothAreaEfficiency " + toothAreaEfficiency.ToString());
+
+        //Brush level = germ score.
+        germification = germification - toothAreaEfficiency * Settings.Instance.movingCleaningEfficiency[GameManager.Instance.germPlayerScore] * Time.deltaTime;
+        Debug.Log("germification after cleaning " + germification.ToString());
+
+        //report toothAreaEfficiency to BrushPlayer
+        BrushPlayer.Instance.AddAreaToCount(toothAreaEfficiency);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.gameObject.tag == "brush")
         {
             Debug.Log("Got Brushed!");
-
-            if (BrushPlayer.Instance.direction.sqrMagnitude > 0)
-            {
-                x_part = Mathf.Pow((BrushPlayer.Instance.direction.x), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
-                y_part = Mathf.Pow((BrushPlayer.Instance.direction.y), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
-                Debug.Log("IHAMAIMC x_part " + x_part.ToString());
-                Debug.Log("IHAMAIMC y_part " + y_part.ToString());
-
-                if (PrefBrushDir.LeftRight == prefDir)
-                {
-                    toothAreaEfficiency = x_part + (y_part * Settings.Instance.inefficientCleaningCoefficient);
-                }
-                else if (PrefBrushDir.UpDown == prefDir)
-                {
-                    toothAreaEfficiency = y_part + (x_part * Settings.Instance.inefficientCleaningCoefficient);
-                }
-                else
-                {
-                    Debug.Log("toothAreaEfficiency is wrong!");
-                }
-                toothAreaEfficiency = BrushPlayer.Instance.fractionOfMaxSpeed * toothAreaEfficiency;
-
-            } else { toothAreaEfficiency = 0; }
-
-            Debug.Log("toothAreaEfficiency " + toothAreaEfficiency.ToString());
-
-            //Brush level = germ score.
-            germification = germification - toothAreaEfficiency * Settings.Instance.movingCleaningEfficiency[GameManager.Instance.germPlayerScore] * Time.deltaTime;
-            Debug.Log("germification after cleaning " + germification.ToString());
-
-            //report toothAreaEfficiency to BrushPlayer
-            BrushPlayer.Instance.AddAreaToCount(toothAreaEfficiency);
-
+            isBeingBrushed = true;
         }
-
     }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "brush")
+        {
+            Debug.Log("Got UnBrushed!");
+            isBeingBrushed = false;
+        }
+    }
+
 
 	// Use this for initialization
 	void Start () {
@@ -107,6 +120,12 @@ public class ToothState : MonoBehaviour {
 
         //cleaningEfficiencyAtMaxSpeed = 100 / secondsToCleanFullyInfectedToothAtMaxSpeed;
         //cleaningEfficiencyAtIdle = 100 / secondsToCleanFullyInfectedToothAtIdle; //idleCleaningEfficiency
+
+
+        if (isBeingBrushed)
+        {
+            brushMe();
+        }
     }
 
     // reset me func (max hp etc)
