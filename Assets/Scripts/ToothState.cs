@@ -15,7 +15,7 @@ public class ToothState : MonoBehaviour {
     {
         // every frame that we are touching this
 
-        if (other.tag == "brush")
+        if (other.gameObject.tag == "brush")
         {
             //direction
         }
