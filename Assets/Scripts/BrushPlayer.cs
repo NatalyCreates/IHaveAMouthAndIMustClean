@@ -50,12 +50,14 @@ public class BrushPlayer : MonoBehaviour {
             direction = Vector2.down;
         }
 
+        //Update movement according to 
+
         // Calculate Average Efficiency on all Tooth Areas that have reported
 
 
     }
 
-    public void AddAreaToCount()
+    public void AddAreaToCount(float efficiency)
     {
         // adds to the list
     }

@@ -62,12 +62,12 @@ public class GameManager : MonoBehaviour {
 
         // show UI and animation of endgam
 
-        if (brushPlayerScore > 3)
+        if (brushPlayerScore >= 3)
         {
             // brush won overall
             // back to menu screen
         }
-        if (germPlayerScore > 3)
+        if (germPlayerScore >= 3)
         {
             // germs won overall
             // back to menu screen
