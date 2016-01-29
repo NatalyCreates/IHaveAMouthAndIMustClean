@@ -30,6 +30,10 @@ public class OneGerm : MonoBehaviour {
                 // show this germ
                 gameObject.GetComponent<SpriteRenderer>().enabled = true;
             }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
         
     }
