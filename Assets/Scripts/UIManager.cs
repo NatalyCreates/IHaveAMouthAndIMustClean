@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour {
         if (fillCooldown > 1f) fillCooldown = 1f;
         cooldownBar.fillAmount = fillCooldown;
 
-        float fillEfficiency = 0.03f + 0.5f;
+        float fillEfficiency = 0.03f + BrushPlayer.Instance.efficiency;
         if (fillEfficiency > 1f) fillCooldown = 1f;
         efficiencyBar.fillAmount = fillEfficiency;
     }
