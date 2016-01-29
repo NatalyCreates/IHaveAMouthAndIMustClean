@@ -11,10 +11,11 @@ public class Settings : MonoBehaviour {
 
 
     // Germs - When does it appear percentage
-    public float percentageGerm1Appears = 1;
-    public float percentageGerm2Appears = 40;
-    public float percentageGerm3Appears = 70;
-    public float percentageGerm4Appears = 100;
+    public float[] percentageGermAppears;
+    //public float percentageGerm1Appears = 1;
+    //public float percentageGerm2Appears = 40;
+    //public float percentageGerm3Appears = 70;
+    //public float percentageGerm4Appears = 100;
 
     public int maxToothAreaHp = 100;
 
@@ -71,6 +72,12 @@ public class Settings : MonoBehaviour {
         movingCleaningEfficiency[0] = 0.05f;
         movingCleaningEfficiency[1] = 0.06f;
         movingCleaningEfficiency[2] = 0.07f;
+
+        percentageGermAppears = new float[4];
+        percentageGermAppears[0] = 1;
+        percentageGermAppears[1] = 40;
+        percentageGermAppears[2] = 70;
+        percentageGermAppears[3] = 100;
 
     }
 	
