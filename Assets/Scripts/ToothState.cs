@@ -17,8 +17,6 @@ public class ToothState : MonoBehaviour {
     {
         // every frame that we are touching this
 
-        //Debug.Log("YAAAAAAAAAY3 " + other.gameObject.name);
-
         if (other.gameObject.tag == "brush")
         {
             Debug.Log("Got Brushed!");
