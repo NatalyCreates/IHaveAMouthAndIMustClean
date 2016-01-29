@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ToothState : MonoBehaviour {
 
-    internal float hp;
+    internal float hp = 1f;
     internal float germification = 0f;
     
 

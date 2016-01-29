@@ -5,16 +5,17 @@ public class Settings : MonoBehaviour {
 
     public static Settings Instance;
 
-    public int roundTime;
+    public int roundTime = 120;
 
     public int winScore = 3;
 
 
     // Germs - When does it appear percentage
-    public float percentageGerm1Appears = 1;
-    public float percentageGerm2Appears = 40;
-    public float percentageGerm3Appears = 70;
-    public float percentageGerm4Appears = 100;
+    public float[] percentageGermAppears;
+    //public float percentageGerm1Appears = 1;
+    //public float percentageGerm2Appears = 40;
+    //public float percentageGerm3Appears = 70;
+    //public float percentageGerm4Appears = 100;
 
     public float maxToothAreaHp = 1f;
 
@@ -67,6 +68,12 @@ public class Settings : MonoBehaviour {
         movingCleaningEfficiency[0] = 0.05f;
         movingCleaningEfficiency[1] = 0.06f;
         movingCleaningEfficiency[2] = 0.07f;
+
+        percentageGermAppears = new float[4];
+        percentageGermAppears[0] = 0.01f;
+        percentageGermAppears[1] = 0.4f;
+        percentageGermAppears[2] = 0.7f;
+        percentageGermAppears[3] = 1.0f;
 
     }
 

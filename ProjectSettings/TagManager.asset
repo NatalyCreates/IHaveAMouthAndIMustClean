@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - brush
+  - timer_text
+  - brush_score_text
+  - germ_score_text
+  - germ_ref
   layers:
   - Default
   - TransparentFX
@@ -41,4 +45,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Teeth
+    uniqueID: 3987360173
+    locked: 0
+  - name: Cavity
+    uniqueID: 3044659653
+    locked: 0
+  - name: Germs
+    uniqueID: 2522665571
+    locked: 0
+  - name: Gums
+    uniqueID: 2189987787
+    locked: 0
+  - name: Brush
+    uniqueID: 1352385195
     locked: 0
