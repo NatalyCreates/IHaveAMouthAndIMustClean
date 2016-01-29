@@ -175,7 +175,7 @@ GameObject:
   - 114: {fileID: 440229694}
   m_Layer: 5
   m_Name: PowerBarFill
-  m_TagString: power_bar_fill
+  m_TagString: cooldown_bar_fill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -248,7 +248,7 @@ GameObject:
   - 60: {fileID: 688868107}
   m_Layer: 0
   m_Name: BrushPlayer
-  m_TagString: Untagged
+  m_TagString: brush
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
