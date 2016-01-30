@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour {
     internal float[] prev_efficiency_array;
     internal float prev_efficiency = 0;
     internal float sum;
-    internal int prev_array_length = 20;
+    internal int prev_array_length = 15;
     internal float fillEfficiency_avg = 0;
 
     void Awake ()

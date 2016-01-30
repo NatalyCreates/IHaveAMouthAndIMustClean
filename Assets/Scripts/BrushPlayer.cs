@@ -10,6 +10,7 @@ public class BrushPlayer : MonoBehaviour {
     internal float fractionOfMaxSpeed = 0;
     internal Vector2 direction = Vector2.zero;
     internal Vector2 direction_normalized;
+    internal Vector2 prev_direction;
     internal float curMaxSpeed;
     internal int speed;
 
@@ -17,6 +18,8 @@ public class BrushPlayer : MonoBehaviour {
     internal float cur_efficiency;
     internal int non_zero_efficiencies;
     internal float total_efficiency;
+
+    internal bool isBrushing;
 
     internal float[] affectedToothAreasEfficiencies;
 
@@ -57,6 +60,26 @@ public class BrushPlayer : MonoBehaviour {
 
         direction_normalized = direction.normalized;
         //Debug.Log("IHAMAIMC direction vector " + direction.ToString());
+
+       // if (isBrushing == true)
+       // {
+            if ((direction.x < 0) && ((prev_direction.x == 0) || (prev_direction.x > 0)))
+            {
+                SoundManager.Instance.PlayBrushLeftSound();
+            }
+            if ((direction.x > 0) && ((prev_direction.x == 0) || (prev_direction.x < 0)))
+            {
+                SoundManager.Instance.PlayBrushRightSound();
+            }
+            if ((direction.y < 0) && ((prev_direction.y == 0) || (prev_direction.y > 0)))
+            {
+                SoundManager.Instance.PlayBrushDownSound();
+            }
+            if ((direction.y > 0) && ((prev_direction.y == 0) || (prev_direction.y < 0)))
+            {
+                SoundManager.Instance.PlayBrushUpSound();
+            }
+       // }
 
         curMaxSpeed = Settings.Instance.maxSpeedBrush[GameManager.Instance.germPlayerScore];
         transform.Translate(direction_normalized.x * curMaxSpeed * Time.deltaTime, direction_normalized.y * curMaxSpeed * Time.deltaTime, 0);
@@ -104,12 +127,33 @@ public class BrushPlayer : MonoBehaviour {
         }
         efficiency = total_efficiency / non_zero_efficiencies;
 
+        prev_direction = direction;
+
     }
 
-//    public void AddAreaToCount(float efficiency)
-//    {
-//        // adds to the list
-//    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "all_teeth")
+        {
+            Debug.Log("isBrushing");
+            isBrushing = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "all_teeth")
+        {
+            Debug.Log("isNotBrushing");
+            isBrushing = false;
+           
+        }
+    }
+
+    //    public void AddAreaToCount(float efficiency)
+    //    {
+    //        // adds to the list
+    //    }
 
 
 
