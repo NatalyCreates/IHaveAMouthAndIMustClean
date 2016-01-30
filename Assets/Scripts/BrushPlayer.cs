@@ -37,14 +37,34 @@ public class BrushPlayer : MonoBehaviour {
 
         direction.x = Input.GetAxis("Horizontal");
         direction.y = Input.GetAxis("Vertical");
+
+        if ((direction.x < 0) && (transform.position.x < -500))
+        {
+            direction.x = 0;
+        }
+        if ((direction.x > 0) && (transform.position.x > 500))
+        {
+            direction.x = 0;
+        }
+        if ((direction.y < 0) && (transform.position.y < -500))
+        {
+            direction.y = 0;
+        }
+        if ((direction.y > 0) && (transform.position.y > 500))
+        {
+            direction.y = 0;
+        }
+
         direction_normalized = direction.normalized;
-        Debug.Log("IHAMAIMC direction vector " + direction.ToString());
+        //Debug.Log("IHAMAIMC direction vector " + direction.ToString());
 
         curMaxSpeed = Settings.Instance.maxSpeedBrush[GameManager.Instance.germPlayerScore];
         transform.Translate(direction_normalized.x * curMaxSpeed * Time.deltaTime, direction_normalized.y * curMaxSpeed * Time.deltaTime, 0);
 
         //fractionOfMaxSpeed = ???? / curMaxSpeed;
-        fractionOfMaxSpeed = 1;
+        //fractionOfMaxSpeed = 1f;
+        fractionOfMaxSpeed = direction.magnitude;
+        if (fractionOfMaxSpeed>1) { fractionOfMaxSpeed = 1; }
 
         // Control Brush Movement
         /*
@@ -67,10 +87,10 @@ public class BrushPlayer : MonoBehaviour {
         }
         */
 
-        //Update movement according to 
+            //Update movement according to 
 
-        // Calculate Average Efficiency on all Tooth Areas that have reported
-        cur_efficiency = 0f;
+            // Calculate Average Efficiency on all Tooth Areas that have reported
+            cur_efficiency = 0f;
         total_efficiency = 0f;
         non_zero_efficiencies = 0;
         GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");

@@ -10,6 +10,12 @@ public class UIManager : MonoBehaviour {
     Text timerText, brushScoreText, germScoreText;
     Image efficiencyBar, cooldownBar, brushLevelBar, germLevelBar;
 
+    internal float[] prev_efficiency_array;
+    internal float prev_efficiency = 0;
+    internal float sum;
+    internal int prev_array_length = 20;
+    internal float fillEfficiency_avg = 0;
+
     void Awake ()
     {
         Instance = this;
@@ -28,7 +34,11 @@ public class UIManager : MonoBehaviour {
         brushLevelBar = GameObject.FindGameObjectWithTag("brush_level_bar").GetComponent<Image>();
         germLevelBar = GameObject.FindGameObjectWithTag("germ_level_bar").GetComponent<Image>();
 
-
+        prev_efficiency_array = new float[prev_array_length];
+        for (var i = 0; i < prev_array_length; i++)
+        {
+            prev_efficiency_array[i] = 0;
+        }
 
     }
 	
@@ -48,7 +58,25 @@ public class UIManager : MonoBehaviour {
 
         float fillEfficiency = 0.03f + BrushPlayer.Instance.efficiency;
         if (fillEfficiency > 1f) fillEfficiency = 1f;
-        efficiencyBar.fillAmount = fillEfficiency;
+        //        efficiencyBar.fillAmount = fillEfficiency;
+        //efficiencyBar.fillAmount = Mathf.Lerp(prev_efficiency, fillEfficiency, Settings.Instance.barMoveSpeed);
+
+        for (var i = 0; i < (prev_array_length-1); i++)
+        {
+            prev_efficiency_array[i] = prev_efficiency_array[i + 1];
+        }
+        prev_efficiency_array[prev_array_length-1] = fillEfficiency;
+
+        sum = 0;
+        for (var i = 0; i < prev_array_length; i++)
+        {
+            sum += prev_efficiency_array[i];
+        }
+        fillEfficiency_avg = sum / prev_array_length;
+        //Debug.Log("prev_efficiency_array: " + prev_efficiency_array.ToString());
+
+        efficiencyBar.fillAmount = Mathf.Lerp(prev_efficiency, fillEfficiency_avg, Time.time);
+        prev_efficiency = fillEfficiency_avg;
 
         float germPlayerFill = 0f;
         float brushPlayerFill = 0f;
