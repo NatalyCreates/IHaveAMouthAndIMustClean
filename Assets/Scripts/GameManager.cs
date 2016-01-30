@@ -65,12 +65,16 @@ public class GameManager : MonoBehaviour {
         if (brushPlayerScore >= 3)
         {
             // brush won overall
+
             // back to menu screen
+            Application.LoadLevel("Main");
         }
         if (germPlayerScore >= 3)
         {
             // germs won overall
+
             // back to menu screen
+            Application.LoadLevel("Main");
         }
         else
         {
