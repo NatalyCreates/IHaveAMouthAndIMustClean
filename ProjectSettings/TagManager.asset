@@ -18,6 +18,7 @@ TagManager:
   - germ_wins
   - germ_level_up
   - brush_level_up
+  - ins
   layers:
   - Default
   - TransparentFX
