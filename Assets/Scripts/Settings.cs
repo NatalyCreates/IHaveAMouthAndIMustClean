@@ -49,11 +49,11 @@ public class Settings : MonoBehaviour {
         secondsUntilCavityAtMaxGerms[3] = 10;
 
         numClicksUntilMaxGerms = new int[4];
-        numClicksUntilMaxGerms[0] = 11;
-        numClicksUntilMaxGerms[1] = 10;
-        numClicksUntilMaxGerms[2] = 9;
+        numClicksUntilMaxGerms[0] = 7;
+        numClicksUntilMaxGerms[1] = 7;
+        numClicksUntilMaxGerms[2] = 7;
         // same as the last level to prevent IndexOutOfRange
-        numClicksUntilMaxGerms[3] = 9;
+        numClicksUntilMaxGerms[3] = 7;
 
         maxSpeedBrush = new int[4];
         maxSpeedBrush[0] = 800;
@@ -63,11 +63,11 @@ public class Settings : MonoBehaviour {
         maxSpeedBrush[3] = 1200;
 
         germClickCooldownTime = new float[4];
-        germClickCooldownTime[0] = 1.2f;
-        germClickCooldownTime[1] = 1f;
-        germClickCooldownTime[2] = 0.8f;
+        germClickCooldownTime[0] = 1.0f;
+        germClickCooldownTime[1] = 0.7f;
+        germClickCooldownTime[2] = 0.7f;
         // same as the last level to prevent IndexOutOfRange
-        germClickCooldownTime[3] = 0.8f;
+        germClickCooldownTime[3] = 0.7f;
 
         idleCleaningEfficiency = new float[4];
         idleCleaningEfficiency[0] = 0;
@@ -77,12 +77,11 @@ public class Settings : MonoBehaviour {
         idleCleaningEfficiency[3] = 0.01f;
 
         movingCleaningEfficiency = new float[4];
-        movingCleaningEfficiency[0] = 0.4f;
-        movingCleaningEfficiency[1] = 0.4f;
-        movingCleaningEfficiency[2] = 0.4f;
+        movingCleaningEfficiency[0] = 0.35f;
+        movingCleaningEfficiency[1] = 0.5f;
+        movingCleaningEfficiency[2] = 0.5f;
         // same as the last level to prevent IndexOutOfRange
-        movingCleaningEfficiency[3] = 0.4f;
-
+        movingCleaningEfficiency[3] = 0.5f;
 
         // NOT RELATED TO LEVELS
         percentageGermAppears = new float[4];

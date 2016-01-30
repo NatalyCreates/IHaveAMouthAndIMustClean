@@ -8,6 +8,7 @@ public class ToothState : MonoBehaviour {
     internal float x_part = 0f;
     internal float y_part = 0f;
     internal float toothAreaEfficiency = 0f;
+    public float toughness;
 
 
     public enum PrefBrushDir { UpDown, LeftRight };
@@ -17,13 +18,13 @@ public class ToothState : MonoBehaviour {
 
     void brushMe()
     {
-        Debug.Log("toothAreaEfficiency " + BrushPlayer.Instance.direction.sqrMagnitude.ToString());
+        //Debug.Log("toothAreaEfficiency " + BrushPlayer.Instance.direction.sqrMagnitude.ToString());
         if ((BrushPlayer.Instance.direction.sqrMagnitude > 0) && (germification > 0))
         {
             x_part = Mathf.Pow((BrushPlayer.Instance.direction.x), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
             y_part = Mathf.Pow((BrushPlayer.Instance.direction.y), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
-            Debug.Log("IHAMAIMC x_part " + x_part.ToString());
-            Debug.Log("IHAMAIMC y_part " + y_part.ToString());
+            //Debug.Log("IHAMAIMC x_part " + x_part.ToString());
+            //Debug.Log("IHAMAIMC y_part " + y_part.ToString());
 
             if (PrefBrushDir.LeftRight == prefDir)
             {
@@ -42,12 +43,12 @@ public class ToothState : MonoBehaviour {
         }
         else { toothAreaEfficiency = 0; }
 
-        Debug.Log("toothAreaEfficiency " + toothAreaEfficiency.ToString());
+        //Debug.Log("toothAreaEfficiency " + toothAreaEfficiency.ToString());
 
         //Brush level = germ score.
         germification = germification - toothAreaEfficiency * Settings.Instance.movingCleaningEfficiency[GameManager.Instance.germPlayerScore] * Time.deltaTime;
         germification = germification < 0 ? 0 : germification;
-        Debug.Log("germification after cleaning " + germification.ToString());
+        //Debug.Log("germification after cleaning " + germification.ToString());
 
         //report toothAreaEfficiency to BrushPlayer
         //Don't report - brushplayer asks us instead.
@@ -85,8 +86,8 @@ public class ToothState : MonoBehaviour {
         // check if cooldown is up, do something and make cooldown 0
         if (GermPlayer.Instance.cooldown >= Settings.Instance.germClickCooldownTime[GameManager.Instance.brushPlayerScore] - 0.12f)
         {
-            // Germ Me
-            germification += (1f/Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore]);
+            // Germ Me, considering my toughness
+            germification += (1f/Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore])/toughness;
             GermPlayer.Instance.cooldown = 0f;
         }
 
