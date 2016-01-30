@@ -5,7 +5,7 @@ public class Settings : MonoBehaviour {
 
     public static Settings Instance;
 
-    internal int roundTime = 120;
+    internal int roundTime = 45;
 
     public int winScore = 3;
 
