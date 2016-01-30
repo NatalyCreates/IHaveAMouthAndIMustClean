@@ -42,11 +42,11 @@ public class Settings : MonoBehaviour {
         Instance = this;
 
         secondsUntilCavityAtMaxGerms = new int[4];
-        secondsUntilCavityAtMaxGerms[0] = 12;
-        secondsUntilCavityAtMaxGerms[1] = 12;
-        secondsUntilCavityAtMaxGerms[2] = 9;
+        secondsUntilCavityAtMaxGerms[0] = 10;
+        secondsUntilCavityAtMaxGerms[1] = 10;
+        secondsUntilCavityAtMaxGerms[2] = 7;
         // same as the last level to prevent IndexOutOfRange
-        secondsUntilCavityAtMaxGerms[3] = 9;
+        secondsUntilCavityAtMaxGerms[3] = 7;
 
         numClicksUntilMaxGerms = new int[4];
         numClicksUntilMaxGerms[0] = 7;
