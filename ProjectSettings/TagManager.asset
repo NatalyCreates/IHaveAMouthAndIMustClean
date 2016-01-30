@@ -54,11 +54,11 @@ TagManager:
   - name: Teeth
     uniqueID: 3987360173
     locked: 0
-  - name: Cavity
-    uniqueID: 3044659653
-    locked: 0
   - name: CavityMid
     uniqueID: 2707174081
+    locked: 0
+  - name: Cavity
+    uniqueID: 3044659653
     locked: 0
   - name: Germs
     uniqueID: 2522665571
