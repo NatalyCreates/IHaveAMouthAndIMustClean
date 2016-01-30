@@ -5,7 +5,7 @@ public class Settings : MonoBehaviour {
 
     public static Settings Instance;
 
-    internal int roundTime = 45;
+    internal int roundTime = 50;
 
     public int winScore = 3;
 
@@ -41,36 +41,50 @@ public class Settings : MonoBehaviour {
     {
         Instance = this;
 
-        secondsUntilCavityAtMaxGerms = new int[3];
+        secondsUntilCavityAtMaxGerms = new int[4];
         secondsUntilCavityAtMaxGerms[0] = 15;
         secondsUntilCavityAtMaxGerms[1] = 15;
         secondsUntilCavityAtMaxGerms[2] = 10;
+        // same as the last level to prevent IndexOutOfRange
+        secondsUntilCavityAtMaxGerms[3] = 10;
 
-        numClicksUntilMaxGerms = new int[3];
+        numClicksUntilMaxGerms = new int[4];
         numClicksUntilMaxGerms[0] = 11;
         numClicksUntilMaxGerms[1] = 10;
         numClicksUntilMaxGerms[2] = 9;
+        // same as the last level to prevent IndexOutOfRange
+        numClicksUntilMaxGerms[3] = 9;
 
-        maxSpeedBrush = new int[3];
+        maxSpeedBrush = new int[4];
         maxSpeedBrush[0] = 800;
         maxSpeedBrush[1] = 800;
         maxSpeedBrush[2] = 1200;
+        // same as the last level to prevent IndexOutOfRange
+        maxSpeedBrush[3] = 1200;
 
-        germClickCooldownTime = new float[3];
+        germClickCooldownTime = new float[4];
         germClickCooldownTime[0] = 1.2f;
         germClickCooldownTime[1] = 1f;
         germClickCooldownTime[2] = 0.8f;
+        // same as the last level to prevent IndexOutOfRange
+        germClickCooldownTime[3] = 0.8f;
 
-        idleCleaningEfficiency = new float[3];
+        idleCleaningEfficiency = new float[4];
         idleCleaningEfficiency[0] = 0;
         idleCleaningEfficiency[1] = 0.005f;
         idleCleaningEfficiency[2] = 0.01f;
+        // same as the last level to prevent IndexOutOfRange
+        idleCleaningEfficiency[3] = 0.01f;
 
-        movingCleaningEfficiency = new float[3];
+        movingCleaningEfficiency = new float[4];
         movingCleaningEfficiency[0] = 0.4f;
         movingCleaningEfficiency[1] = 0.4f;
         movingCleaningEfficiency[2] = 0.4f;
+        // same as the last level to prevent IndexOutOfRange
+        movingCleaningEfficiency[3] = 0.4f;
 
+
+        // NOT RELATED TO LEVELS
         percentageGermAppears = new float[4];
         percentageGermAppears[0] = 0.01f;
         percentageGermAppears[1] = 0.4f;

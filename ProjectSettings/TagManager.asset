@@ -14,6 +14,10 @@ TagManager:
   - all_teeth
   - brush_level_bar
   - germ_level_bar
+  - brush_wins
+  - germ_wins
+  - germ_level_up
+  - brush_level_up
   layers:
   - Default
   - TransparentFX
