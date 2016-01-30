@@ -50,33 +50,6 @@ public class UIManager : MonoBehaviour {
         if (fillEfficiency > 1f) fillEfficiency = 1f;
         efficiencyBar.fillAmount = fillEfficiency;
 
-        
-        
-        // TRY
-        /*
-        float tParam = 0f;
-
-        if ((efficiencyBar.fillAmount < fillEfficiency - 0.01f) || (efficiencyBar.fillAmount > fillEfficiency + 0.01f))
-        {
-            Mathf.Lerp(efficiencyBar.fillAmount, fillEfficiency, 1f);
-            if (tParam < 1)
-            {
-                tParam += Time.deltaTime * 4f;
-            }
-            else
-            {
-                tParam = 0f;
-            }
-            efficiencyBar.fillAmount = Mathf.Lerp(efficiencyBar.fillAmount, fillEfficiency, tParam);
-        }
-        else
-        {
-            //efficiencyBar.fillAmount = fillEfficiency;
-            tParam = 0f;
-        }
-        */
-        // TRY
-
         float germPlayerFill = 0f;
         float brushPlayerFill = 0f;
 
