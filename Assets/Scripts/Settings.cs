@@ -47,9 +47,9 @@ public class Settings : MonoBehaviour {
         secondsUntilCavityAtMaxGerms[2] = 10;
 
         numClicksUntilMaxGerms = new int[3];
-        numClicksUntilMaxGerms[0] = 11;
-        numClicksUntilMaxGerms[1] = 10;
-        numClicksUntilMaxGerms[2] = 9;
+        numClicksUntilMaxGerms[0] = 7;
+        numClicksUntilMaxGerms[1] = 7;
+        numClicksUntilMaxGerms[2] = 7;
 
         maxSpeedBrush = new int[3];
         maxSpeedBrush[0] = 800;
@@ -57,9 +57,9 @@ public class Settings : MonoBehaviour {
         maxSpeedBrush[2] = 1200;
 
         germClickCooldownTime = new float[3];
-        germClickCooldownTime[0] = 1.2f;
-        germClickCooldownTime[1] = 1f;
-        germClickCooldownTime[2] = 0.8f;
+        germClickCooldownTime[0] = 1.0f;
+        germClickCooldownTime[1] = 0.7f;
+        germClickCooldownTime[2] = 0.7f;
 
         idleCleaningEfficiency = new float[3];
         idleCleaningEfficiency[0] = 0;
@@ -67,9 +67,9 @@ public class Settings : MonoBehaviour {
         idleCleaningEfficiency[2] = 0.01f;
 
         movingCleaningEfficiency = new float[3];
-        movingCleaningEfficiency[0] = 0.4f;
-        movingCleaningEfficiency[1] = 0.4f;
-        movingCleaningEfficiency[2] = 0.4f;
+        movingCleaningEfficiency[0] = 0.35f;
+        movingCleaningEfficiency[1] = 0.5f;
+        movingCleaningEfficiency[2] = 0.5f;
 
         percentageGermAppears = new float[4];
         percentageGermAppears[0] = 0.01f;
