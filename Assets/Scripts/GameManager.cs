@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
 
     bool brushWon = false;
     bool germWon = false;
+    internal bool brushLevelAnimPlaying = false;
+    internal bool germLevelAnimPlaying = false;
 
     bool timesUpSoundPlaying = false;
 
@@ -44,24 +46,40 @@ public class GameManager : MonoBehaviour {
 
         timesUpSoundPlaying = false;
         totalGameOver = false;
+        brushLevelUp.transform.localPosition = new Vector2(0f,-600f);
+        brushLevelUp.color = new Color(1f, 1f, 1f, 0f);
+        germLevelUp.transform.localPosition = new Vector2(0f, -600f);
+        germLevelUp.color = new Color(1f, 1f, 1f, 0f);
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        timePlayedThisRound = (int)Time.time - lastRoundStartedTime;
-        //Helper.Instance.Print("timePlayedThisRound = " + timePlayedThisRound.ToString());
-        //Helper.Instance.Print("lastRoundStartedTime = " + lastRoundStartedTime.ToString());
-        //Helper.Instance.Print("roundTime = " + Settings.Instance.roundTime.ToString());
-        
-        if (timePlayedThisRound >= Settings.Instance.roundTime + 1)
+        if (Input.GetKey(KeyCode.Escape))
         {
-            lastRoundStartedTime = (int)Time.time;
+            Application.LoadLevel("Menu");
+        }
+
+        if ((totalGameOver) || (germLevelAnimPlaying) || (brushLevelAnimPlaying))
+        {
             timePlayedThisRound = 0;
-            //Helper.Instance.Print("time over");
-            EndGame(true);
-            // stop game
-            Application.Quit();
+        }
+        else
+        {
+            timePlayedThisRound = (int)Time.time - lastRoundStartedTime;
+            //Helper.Instance.Print("timePlayedThisRound = " + timePlayedThisRound.ToString());
+            //Helper.Instance.Print("lastRoundStartedTime = " + lastRoundStartedTime.ToString());
+            //Helper.Instance.Print("roundTime = " + Settings.Instance.roundTime.ToString());
+
+            if (timePlayedThisRound >= Settings.Instance.roundTime + 1)
+            {
+                lastRoundStartedTime = (int)Time.time;
+                timePlayedThisRound = 0;
+                //Helper.Instance.Print("time over");
+                EndGame(true);
+                // stop game
+                Application.Quit();
+            }
         }
 
         timeLeftThisRound = Settings.Instance.roundTime - timePlayedThisRound;
@@ -82,6 +100,16 @@ public class GameManager : MonoBehaviour {
         {
             ShowGermWinAnim();
         }
+        if (brushLevelAnimPlaying)
+        {
+            brushLevelUp.color = new Color(1f, 1f, 1f, 1f);
+            ShowBrushLevelUpAnim();
+        }
+        if (germLevelAnimPlaying)
+        {
+            germLevelUp.color = new Color(1f, 1f, 1f, 1f);
+            ShowGermLevelUpAnim();
+        }
     }
 
     void ShowBrushWinAnim()
@@ -93,6 +121,36 @@ public class GameManager : MonoBehaviour {
             // fade in ended
             brushWon = false;
             StartCoroutine(BackToMainMenu());
+        }
+    }
+
+    void ShowBrushLevelUpAnim()
+    {
+        brushLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(brushLevelUp.transform.localPosition.x, brushLevelUp.transform.localPosition.y), new Vector2(-601f, 301f), 1.5f * Time.deltaTime);
+        if ((brushLevelUp.transform.localPosition.x >= -600f) && (brushLevelUp.transform.localPosition.y >= 300f))
+        {
+            // move ended
+            brushLevelAnimPlaying = false;
+            ResetGame();
+            brushLevelUp.transform.localPosition = new Vector2(0f, -600f);
+            brushLevelUp.color = new Color(1f, 1f, 1f, 0f);
+            germLevelUp.transform.localPosition = new Vector2(0f, -600f);
+            germLevelUp.color = new Color(1f, 1f, 1f, 0f);
+        }
+    }
+
+    void ShowGermLevelUpAnim()
+    {
+        germLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(germLevelUp.transform.localPosition.x, germLevelUp.transform.localPosition.y), new Vector2(601f, 301f), 1.5f * Time.deltaTime);
+        if ((germLevelUp.transform.localPosition.x <= 600f) && (germLevelUp.transform.localPosition.y >= 300f))
+        {
+            // move ended
+            germLevelAnimPlaying = false;
+            ResetGame();
+            brushLevelUp.transform.localPosition = new Vector2(0f, -600f);
+            brushLevelUp.color = new Color(1f, 1f, 1f, 0f);
+            germLevelUp.transform.localPosition = new Vector2(0f, -600f);
+            germLevelUp.color = new Color(1f, 1f, 1f, 0f);
         }
     }
 
@@ -148,21 +206,27 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
-            foreach (GameObject area in allTeeth)
-            {
-                //if (area == null) { Debug.Log("IHAMAIMC area is null"); }
-                //Debug.Log("IHAMAIMC area name:  " + area.name);
-                area.GetComponent<ToothState>().resetToothState();
-            }
-            //reset timer
-            lastRoundStartedTime = (int)Time.time;
-            timePlayedThisRound = 0;
-            //reset cooldown bar to the new level clickCooldownTime
-            GermPlayer.Instance.reset();
-            //set brush speed to 0
+            if (brushWins) germLevelAnimPlaying = true;
+            else brushLevelAnimPlaying = true;
         }
         timesUpSoundPlaying = false;
+    }
+
+    void ResetGame()
+    {
+        GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
+        foreach (GameObject area in allTeeth)
+        {
+            //if (area == null) { Debug.Log("IHAMAIMC area is null"); }
+            //Debug.Log("IHAMAIMC area name:  " + area.name);
+            area.GetComponent<ToothState>().resetToothState();
+        }
+        //reset timer
+        lastRoundStartedTime = (int)Time.time;
+        timePlayedThisRound = 0;
+        //reset cooldown bar to the new level clickCooldownTime
+        GermPlayer.Instance.reset();
+        //set brush speed to 0
     }
 
     // endgame (call func if cavity or if time out) with winner flag -done

@@ -16,13 +16,13 @@ public class UIManager : MonoBehaviour {
     internal int prev_array_length = 15;
     internal float fillEfficiency_avg = 0;
 
-    void Awake ()
+    void Awake()
     {
         Instance = this;
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         timerText = GameObject.FindGameObjectWithTag("timer_text").GetComponent<Text>();
 
         brushScoreText = GameObject.FindGameObjectWithTag("brush_score_text").GetComponent<Text>();
@@ -41,11 +41,11 @@ public class UIManager : MonoBehaviour {
         }
 
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-        if (GameManager.Instance.totalGameOver)
+    // Update is called once per frame
+    void Update() {
+
+        if ((GameManager.Instance.totalGameOver) || (GameManager.Instance.germLevelAnimPlaying) || (GameManager.Instance.brushLevelAnimPlaying))
         {
             timerText.text = "00:00";
 

@@ -1725,7 +1725,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 236}
+  m_AnchoredPosition: {x: 0, y: -600}
   m_SizeDelta: {x: 907, y: 711}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &572482919
@@ -1846,7 +1846,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchoredPosition: {x: 0, y: -600}
   m_SizeDelta: {x: 1335, y: 732}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &646122056
@@ -1861,7 +1861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: .746999979}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3293,6 +3293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4240a203287e9604b84f31f7320d8a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalGameOver: 0
 --- !u!114 &1267100536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3420,7 +3421,7 @@ MonoBehaviour:
   germifyClip: {fileID: 8300000, guid: 6f46f8760fa88ef45b3de969e29f88e8, type: 3}
   brushRightClip: {fileID: 8300000, guid: c82dfa01802576642998f4bc12094471, type: 3}
   brushLeftClip: {fileID: 8300000, guid: 5a514c5a5d932db449b36f01dc30e7d9, type: 3}
-  timesUpClip: {fileID: 0}
+  timesUpClip: {fileID: 8300000, guid: 0926bb89e4311d34cb86028fd77606e5, type: 3}
 --- !u!1001 &1278275963
 Prefab:
   m_ObjectHideFlags: 0
