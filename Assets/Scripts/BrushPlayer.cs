@@ -83,6 +83,11 @@ public class BrushPlayer : MonoBehaviour {
             }
         }
         efficiency = total_efficiency / non_zero_efficiencies;
+
+        // for testing lerp
+        //if (efficiency > 0.01f) efficiency = 1f;
+        //else efficiency = 0f;
+
     }
 
 //    public void AddAreaToCount(float efficiency)
