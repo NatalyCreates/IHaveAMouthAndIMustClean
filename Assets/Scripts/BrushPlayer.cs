@@ -62,9 +62,9 @@ public class BrushPlayer : MonoBehaviour {
         transform.Translate(direction_normalized.x * curMaxSpeed * Time.deltaTime, direction_normalized.y * curMaxSpeed * Time.deltaTime, 0);
 
         //fractionOfMaxSpeed = ???? / curMaxSpeed;
-        //fractionOfMaxSpeed = 1f;
-        fractionOfMaxSpeed = direction.magnitude;
-        if (fractionOfMaxSpeed>1) { fractionOfMaxSpeed = 1; }
+        fractionOfMaxSpeed = 1f;
+        //fractionOfMaxSpeed = direction.magnitude;
+        //if (fractionOfMaxSpeed>1) { fractionOfMaxSpeed = 1; }
 
         // Control Brush Movement
         /*
