@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     public static UIManager Instance;
 
     Text timerText, brushScoreText, germScoreText;
-    Image efficiencyBar, cooldownBar;
+    Image efficiencyBar, cooldownBar, brushLevelBar, germLevelBar;
 
     void Awake ()
     {
@@ -24,6 +24,9 @@ public class UIManager : MonoBehaviour {
 
         cooldownBar = GameObject.FindGameObjectWithTag("cooldown_bar_fill").GetComponent<Image>();
         efficiencyBar = GameObject.FindGameObjectWithTag("efficiency_bar_fill").GetComponent<Image>();
+
+        brushLevelBar = GameObject.FindGameObjectWithTag("brush_level_bar").GetComponent<Image>();
+        germLevelBar = GameObject.FindGameObjectWithTag("germ_level_bar").GetComponent<Image>();
 
 
 
@@ -44,7 +47,40 @@ public class UIManager : MonoBehaviour {
         cooldownBar.fillAmount = fillCooldown;
 
         float fillEfficiency = 0.03f + BrushPlayer.Instance.efficiency;
-        if (fillEfficiency > 1f) fillCooldown = 1f;
+        if (fillEfficiency > 1f) fillEfficiency = 1f;
         efficiencyBar.fillAmount = fillEfficiency;
+
+        float germPlayerFill = 0f;
+        float brushPlayerFill = 0f;
+
+        switch (GameManager.Instance.brushPlayerScore)
+        {
+            case 0:
+                germPlayerFill = 0.1f;
+                break;
+            case 1:
+                germPlayerFill = 0.35f;
+                break;
+            case 2:
+                germPlayerFill = 0.75f;
+                break;
+        }
+
+        switch (GameManager.Instance.germPlayerScore)
+        {
+            case 0:
+                brushPlayerFill = 0.1f;
+                break;
+            case 1:
+                brushPlayerFill = 0.35f;
+                break;
+            case 2:
+                brushPlayerFill = 0.75f;
+                break;
+        }
+
+        brushLevelBar.fillAmount = brushPlayerFill;
+        germLevelBar.fillAmount = germPlayerFill;
+
     }
 }

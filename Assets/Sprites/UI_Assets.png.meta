@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c5a6824e515eb1b41b0af4a45a420eae
-timeCreated: 1454092346
+timeCreated: 1454110775
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -24,6 +24,11 @@ TextureImporter:
     21300034: UI_Assets_17
     21300036: UI_Assets_18
     21300038: UI_Assets_19
+    21300040: UI_Assets_20
+    21300042: UI_Assets_21
+    21300044: UI_Assets_22
+    21300046: UI_Assets_23
+    21300048: UI_Assets_24
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -73,112 +78,142 @@ TextureImporter:
     - name: UI_Assets_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 290
-        width: 45
-        height: 168
+        x: 23
+        y: 598
+        width: 93
+        height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: UI_Assets_1
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 290
-        width: 45
-        height: 168
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: UI_Assets_2
       rect:
         serializedVersion: 2
-        x: 142
-        y: 270
-        width: 176
+        x: 188
+        y: 498
+        width: 177
         height: 208
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: UI_Assets_3
       rect:
         serializedVersion: 2
-        x: 414
-        y: 228
-        width: 130
-        height: 261
+        x: 385
+        y: 618
+        width: 96
+        height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: UI_Assets_4
-      rect:
-        serializedVersion: 2
-        x: 597
-        y: 228
-        width: 129
-        height: 261
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: UI_Assets_5
       rect:
         serializedVersion: 2
-        x: 14
-        y: 6
-        width: 40
-        height: 239
+        x: 482
+        y: 523
+        width: 48
+        height: 170
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: UI_Assets_6
-      rect:
-        serializedVersion: 2
-        x: 129
-        y: 2
-        width: 52
-        height: 247
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: UI_Assets_7
-      rect:
-        serializedVersion: 2
-        x: 225
-        y: 13
-        width: 30
-        height: 239
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: UI_Assets_8
       rect:
         serializedVersion: 2
-        x: 291
-        y: 13
-        width: 30
-        height: 239
+        x: 8
+        y: 523
+        width: 108
+        height: 61
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: UI_Assets_9
       rect:
         serializedVersion: 2
-        x: 346
-        y: 0
-        width: 207
-        height: 127
+        x: 399
+        y: 557
+        width: 82
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: UI_Assets_10
+    - name: UI_Assets_12
       rect:
         serializedVersion: 2
-        x: 577
-        y: 14
-        width: 176
-        height: 209
+        x: 0
+        y: 288
+        width: 45
+        height: 168
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: UI_Assets_13
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 288
+        width: 45
+        height: 168
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: UI_Assets_14
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 308
+        width: 208
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: UI_Assets_15
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 4
+        width: 40
+        height: 239
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: UI_Assets_16
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 0
+        width: 52
+        height: 247
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: UI_Assets_17
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 11
+        width: 30
+        height: 239
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: UI_Assets_18
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 11
+        width: 30
+        height: 239
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: UI_Assets_19
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 28
+        width: 130
+        height: 262
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
