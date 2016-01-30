@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -15,6 +16,11 @@ public class GameManager : MonoBehaviour {
 
     internal int roundNumber = 1;
 
+    Image brushWins, germWins, brushLevelUp, germLevelUp;
+
+    bool brushWon = false;
+    bool germWon = false;
+
     void Awake()
     {
         Instance = this;
@@ -26,6 +32,12 @@ public class GameManager : MonoBehaviour {
         brushPlayerScore = 0;
         germPlayerScore = 0;
         roundNumber = 1;
+
+        brushWins = GameObject.FindGameObjectWithTag("brush_wins").GetComponent<Image>();
+        germWins = GameObject.FindGameObjectWithTag("germ_wins").GetComponent<Image>();
+        brushLevelUp = GameObject.FindGameObjectWithTag("brush_level_up").GetComponent<Image>();
+        germLevelUp = GameObject.FindGameObjectWithTag("germ_level_up").GetComponent<Image>();
+
     }
 	
 	// Update is called once per frame
@@ -50,6 +62,49 @@ public class GameManager : MonoBehaviour {
 
         // count until max round time and check winner
 
+        if (brushWon)
+        {
+            ShowBrushWinAnim();
+        }
+        if (germWon)
+        {
+            ShowGermWinAnim();
+        }
+    }
+
+    void ShowBrushWinAnim()
+    {
+        float aParam = Mathf.Lerp(brushWins.color.a, 1f, Time.deltaTime * 3f);
+        brushWins.color = new Color(1f, 1f, 1f, aParam);
+        if (brushWins.color.a >= 0.98f)
+        {
+            // fade in ended
+            brushWon = false;
+            StartCoroutine(BackToMainMenu());
+        }
+    }
+
+    void ShowGermWinAnim()
+    {
+        float aParam = Mathf.Lerp(germWins.color.a, 1f, Time.deltaTime * 3f);
+        germWins.color = new Color(1f, 1f, 1f, aParam);
+        if (germWins.color.a >= 0.98f)
+        {
+            // fade in ended
+            germWon = false;
+            StartCoroutine(BackToMainMenu());
+        }
+    }
+
+    IEnumerator BackToMainMenu()
+    {
+        yield return new WaitForSeconds(3f);
+        RetToMainMenu();
+    }
+
+    void RetToMainMenu()
+    {
+        Application.LoadLevel("Menu");
     }
 
     public void EndGame (bool brushWins)
@@ -70,14 +125,14 @@ public class GameManager : MonoBehaviour {
             // brush won overall
 
             // back to menu screen
-            Application.LoadLevel("Menu");
+            brushWon = true;
         }
         if (germPlayerScore >= 3)
         {
             // germs won overall
 
             // back to menu screen
-            Application.LoadLevel("Menu");
+            germWon = true;
         }
         else
         {
