@@ -10,6 +10,7 @@ public class BrushPlayer : MonoBehaviour {
     internal float fractionOfMaxSpeed = 0;
     internal Vector2 direction = Vector2.zero;
     internal Vector2 direction_normalized;
+    internal Vector2 prev_direction;
     internal float curMaxSpeed;
     internal int speed;
 
@@ -58,6 +59,23 @@ public class BrushPlayer : MonoBehaviour {
         direction_normalized = direction.normalized;
         //Debug.Log("IHAMAIMC direction vector " + direction.ToString());
 
+        if ((direction.x < 0) && ((prev_direction.x == 0) || (prev_direction.x > 0)))
+        {
+            //Play brush left
+        }
+        if ((direction.x > 0) && ((prev_direction.x == 0) || (prev_direction.x < 0)))
+        {
+            //Play brush right
+        }
+        if ((direction.y < 0) && ((prev_direction.y == 0) || (prev_direction.y > 0)))
+        {
+            //Play brush down
+        }
+        if ((direction.y > 0) && ((prev_direction.y == 0) || (prev_direction.y < 0)))
+        {
+            //Play brush up
+        }
+
         curMaxSpeed = Settings.Instance.maxSpeedBrush[GameManager.Instance.germPlayerScore];
         transform.Translate(direction_normalized.x * curMaxSpeed * Time.deltaTime, direction_normalized.y * curMaxSpeed * Time.deltaTime, 0);
 
@@ -103,6 +121,8 @@ public class BrushPlayer : MonoBehaviour {
             }
         }
         efficiency = total_efficiency / non_zero_efficiencies;
+
+        prev_direction = direction;
 
     }
 

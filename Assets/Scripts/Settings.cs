@@ -5,7 +5,7 @@ public class Settings : MonoBehaviour {
 
     public static Settings Instance;
 
-    internal int roundTime = 50;
+    internal int roundTime = 60;
 
     public int winScore = 3;
 
@@ -44,7 +44,7 @@ public class Settings : MonoBehaviour {
         secondsUntilCavityAtMaxGerms = new int[4];
         secondsUntilCavityAtMaxGerms[0] = 15;
         secondsUntilCavityAtMaxGerms[1] = 15;
-        secondsUntilCavityAtMaxGerms[2] = 10;
+        secondsUntilCavityAtMaxGerms[2] = 12;
         // same as the last level to prevent IndexOutOfRange
         secondsUntilCavityAtMaxGerms[3] = 10;
 
@@ -63,9 +63,9 @@ public class Settings : MonoBehaviour {
         maxSpeedBrush[3] = 1200;
 
         germClickCooldownTime = new float[4];
-        germClickCooldownTime[0] = 1.0f;
-        germClickCooldownTime[1] = 0.7f;
-        germClickCooldownTime[2] = 0.7f;
+        germClickCooldownTime[0] = 0.5f;
+        germClickCooldownTime[1] = 0.35f;
+        germClickCooldownTime[2] = 0.35f;
         // same as the last level to prevent IndexOutOfRange
         germClickCooldownTime[3] = 0.7f;
 
