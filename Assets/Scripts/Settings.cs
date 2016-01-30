@@ -5,7 +5,7 @@ public class Settings : MonoBehaviour {
 
     public static Settings Instance;
 
-    internal int roundTime = 60;
+    internal int roundTime = 45;
 
     public int winScore = 3;
 
@@ -29,8 +29,6 @@ public class Settings : MonoBehaviour {
 
     public int[] maxSpeedBrush;
 
-    internal float barMoveSpeed = 0.1f;
-
     public float secsToFullSpeed = 0.3f; // brush acceleration
 
     public float[] germClickCooldownTime;
@@ -44,14 +42,14 @@ public class Settings : MonoBehaviour {
         Instance = this;
 
         secondsUntilCavityAtMaxGerms = new int[3];
-        secondsUntilCavityAtMaxGerms[0] = 12;
-        secondsUntilCavityAtMaxGerms[1] = 12;
-        secondsUntilCavityAtMaxGerms[2] = 9;
+        secondsUntilCavityAtMaxGerms[0] = 15;
+        secondsUntilCavityAtMaxGerms[1] = 15;
+        secondsUntilCavityAtMaxGerms[2] = 10;
 
         numClicksUntilMaxGerms = new int[3];
-        numClicksUntilMaxGerms[0] = 7;
-        numClicksUntilMaxGerms[1] = 7;
-        numClicksUntilMaxGerms[2] = 7;
+        numClicksUntilMaxGerms[0] = 11;
+        numClicksUntilMaxGerms[1] = 10;
+        numClicksUntilMaxGerms[2] = 9;
 
         maxSpeedBrush = new int[3];
         maxSpeedBrush[0] = 800;
@@ -59,9 +57,9 @@ public class Settings : MonoBehaviour {
         maxSpeedBrush[2] = 1200;
 
         germClickCooldownTime = new float[3];
-        germClickCooldownTime[0] = 1.0f;
-        germClickCooldownTime[1] = 0.7f;
-        germClickCooldownTime[2] = 0.7f;
+        germClickCooldownTime[0] = 1.2f;
+        germClickCooldownTime[1] = 1f;
+        germClickCooldownTime[2] = 0.8f;
 
         idleCleaningEfficiency = new float[3];
         idleCleaningEfficiency[0] = 0;

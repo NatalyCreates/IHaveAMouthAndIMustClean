@@ -22,7 +22,10 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        lastRoundStartedTime = (int)Time.time;
+        brushPlayerScore = 0;
+        germPlayerScore = 0;
+        roundNumber = 1;
     }
 	
 	// Update is called once per frame
@@ -65,12 +68,16 @@ public class GameManager : MonoBehaviour {
         if (brushPlayerScore >= 3)
         {
             // brush won overall
+
             // back to menu screen
+            Application.LoadLevel("Menu");
         }
         if (germPlayerScore >= 3)
         {
             // germs won overall
+
             // back to menu screen
+            Application.LoadLevel("Menu");
         }
         else
         {
