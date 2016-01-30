@@ -116,10 +116,18 @@ public class ToothState : MonoBehaviour {
         hp = hp - (germification * Settings.Instance.dmgPerSecAtMaxGermification * Time.deltaTime);
         //hp = hp - (germification * 1 * Time.deltaTime);
         //Debug.Log("IHAMAIMC hp " + hp.ToString());
-        if (hp <= 0)
+        if ((GameManager.Instance.totalGameOver) || (GameManager.Instance.germLevelAnimPlaying) || (GameManager.Instance.brushLevelAnimPlaying))
         {
-            GameManager.Instance.EndGame(false);
+            //nada
         }
+        else
+        {
+            if (hp <= 0)
+            {
+                GameManager.Instance.EndGame(false);
+            }
+        }
+        
 
 
 

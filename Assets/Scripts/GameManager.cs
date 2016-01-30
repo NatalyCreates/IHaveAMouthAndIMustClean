@@ -77,8 +77,6 @@ public class GameManager : MonoBehaviour {
                 timePlayedThisRound = 0;
                 //Helper.Instance.Print("time over");
                 EndGame(true);
-                // stop game
-                Application.Quit();
             }
         }
 
@@ -98,6 +96,7 @@ public class GameManager : MonoBehaviour {
         }
         if (germWon)
         {
+            Debug.Log("ss");
             ShowGermWinAnim();
         }
         if (brushLevelAnimPlaying)
@@ -126,8 +125,8 @@ public class GameManager : MonoBehaviour {
 
     void ShowBrushLevelUpAnim()
     {
-        brushLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(brushLevelUp.transform.localPosition.x, brushLevelUp.transform.localPosition.y), new Vector2(-601f, 301f), 1.5f * Time.deltaTime);
-        if ((brushLevelUp.transform.localPosition.x >= -600f) && (brushLevelUp.transform.localPosition.y >= 300f))
+        brushLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(brushLevelUp.transform.localPosition.x, brushLevelUp.transform.localPosition.y), new Vector2(-605f, 305f), 2.6f * Time.deltaTime);
+        if ((brushLevelUp.transform.localPosition.x <= -600f) && (brushLevelUp.transform.localPosition.y <= 300f))
         {
             // move ended
             brushLevelAnimPlaying = false;
@@ -141,8 +140,8 @@ public class GameManager : MonoBehaviour {
 
     void ShowGermLevelUpAnim()
     {
-        germLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(germLevelUp.transform.localPosition.x, germLevelUp.transform.localPosition.y), new Vector2(601f, 301f), 1.5f * Time.deltaTime);
-        if ((germLevelUp.transform.localPosition.x <= 600f) && (germLevelUp.transform.localPosition.y >= 300f))
+        germLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(germLevelUp.transform.localPosition.x, germLevelUp.transform.localPosition.y), new Vector2(605f, 305f), 2.6f * Time.deltaTime);
+        if ((germLevelUp.transform.localPosition.x >= 600f) && (germLevelUp.transform.localPosition.y <= 300f))
         {
             // move ended
             germLevelAnimPlaying = false;
@@ -197,7 +196,7 @@ public class GameManager : MonoBehaviour {
             // back to menu screen
             brushWon = true;
         }
-        if (germPlayerScore >= 3)
+        else if (germPlayerScore >= 3)
         {
             // germs won overall
             totalGameOver = true;
