@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour {
 
     Image brushWins, germWins, brushLevelUp, germLevelUp;
 
+    Image[] insImages;
+
     bool brushWon = false;
     bool germWon = false;
     internal bool brushLevelAnimPlaying = false;
@@ -26,6 +28,9 @@ public class GameManager : MonoBehaviour {
     bool timesUpSoundPlaying = false;
 
     public bool totalGameOver = false;
+    public bool insScreen = true;
+
+    bool fadingIns = false;
 
     void Awake()
     {
@@ -44,12 +49,21 @@ public class GameManager : MonoBehaviour {
         brushLevelUp = GameObject.FindGameObjectWithTag("brush_level_up").GetComponent<Image>();
         germLevelUp = GameObject.FindGameObjectWithTag("germ_level_up").GetComponent<Image>();
 
+        insImages = new Image[4];
+        insImages[0] = GameObject.FindGameObjectsWithTag("ins")[0].GetComponent<Image>();
+        insImages[1] = GameObject.FindGameObjectsWithTag("ins")[1].GetComponent<Image>();
+        insImages[2] = GameObject.FindGameObjectsWithTag("ins")[2].GetComponent<Image>();
+        insImages[3] = GameObject.FindGameObjectsWithTag("ins")[3].GetComponent<Image>();
+
         timesUpSoundPlaying = false;
         totalGameOver = false;
         brushLevelUp.transform.localPosition = new Vector2(0f,-600f);
         brushLevelUp.color = new Color(1f, 1f, 1f, 0f);
         germLevelUp.transform.localPosition = new Vector2(0f, -600f);
         germLevelUp.color = new Color(1f, 1f, 1f, 0f);
+        insScreen = true;
+        fadingIns = false;
+        StartCoroutine(INSSSS());
     }
 	
 	// Update is called once per frame
@@ -60,9 +74,10 @@ public class GameManager : MonoBehaviour {
             Application.LoadLevel("Menu");
         }
 
-        if ((totalGameOver) || (germLevelAnimPlaying) || (brushLevelAnimPlaying))
+        if ((totalGameOver) || (germLevelAnimPlaying) || (brushLevelAnimPlaying) || (insScreen))
         {
             timePlayedThisRound = 0;
+            lastRoundStartedTime = (int)Time.time;
         }
         else
         {
@@ -96,7 +111,6 @@ public class GameManager : MonoBehaviour {
         }
         if (germWon)
         {
-            Debug.Log("ss");
             ShowGermWinAnim();
         }
         if (brushLevelAnimPlaying)
@@ -109,6 +123,10 @@ public class GameManager : MonoBehaviour {
             germLevelUp.color = new Color(1f, 1f, 1f, 1f);
             ShowGermLevelUpAnim();
         }
+        if (fadingIns)
+        {
+            InsFadeOut();
+        }
     }
 
     void ShowBrushWinAnim()
@@ -120,6 +138,27 @@ public class GameManager : MonoBehaviour {
             // fade in ended
             brushWon = false;
             StartCoroutine(BackToMainMenu());
+        }
+    }
+
+    IEnumerator INSSSS()
+    {
+        yield return new WaitForSeconds(4f);
+        fadingIns = true;
+    }
+
+    void InsFadeOut()
+    {
+        float aParam = Mathf.Lerp(insImages[0].color.a, 0f, Time.deltaTime * 2f);
+        insImages[0].color = new Color(1f, 1f, 1f, aParam);
+        insImages[1].color = new Color(1f, 1f, 1f, aParam);
+        insImages[2].color = new Color(1f, 1f, 1f, aParam);
+        insImages[3].color = new Color(1f, 1f, 1f, aParam);
+        if (aParam <= 0.05f)
+        {
+            // fade in ended
+            insScreen = false;
+            // start game
         }
     }
 
