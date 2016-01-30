@@ -5,7 +5,7 @@ public class Settings : MonoBehaviour {
 
     public static Settings Instance;
 
-    public int roundTime = 120;
+    internal int roundTime = 120;
 
     public int winScore = 3;
 
@@ -43,18 +43,18 @@ public class Settings : MonoBehaviour {
 
         secondsUntilCavityAtMaxGerms = new int[3];
         secondsUntilCavityAtMaxGerms[0] = 15;
-        secondsUntilCavityAtMaxGerms[1] = 13;
+        secondsUntilCavityAtMaxGerms[1] = 15;
         secondsUntilCavityAtMaxGerms[2] = 10;
 
         numClicksUntilMaxGerms = new int[3];
-        numClicksUntilMaxGerms[0] = 13;
+        numClicksUntilMaxGerms[0] = 11;
         numClicksUntilMaxGerms[1] = 10;
-        numClicksUntilMaxGerms[2] = 7;
+        numClicksUntilMaxGerms[2] = 9;
 
         maxSpeedBrush = new int[3];
-        maxSpeedBrush[0] = 40;
-        maxSpeedBrush[1] = 50;
-        maxSpeedBrush[2] = 60;
+        maxSpeedBrush[0] = 800;
+        maxSpeedBrush[1] = 800;
+        maxSpeedBrush[2] = 1200;
 
         germClickCooldownTime = new float[3];
         germClickCooldownTime[0] = 1.2f;
@@ -67,9 +67,9 @@ public class Settings : MonoBehaviour {
         idleCleaningEfficiency[2] = 0.01f;
 
         movingCleaningEfficiency = new float[3];
-        movingCleaningEfficiency[0] = 0.05f;
-        movingCleaningEfficiency[1] = 0.06f;
-        movingCleaningEfficiency[2] = 0.07f;
+        movingCleaningEfficiency[0] = 0.4f;
+        movingCleaningEfficiency[1] = 0.4f;
+        movingCleaningEfficiency[2] = 0.4f;
 
         percentageGermAppears = new float[4];
         percentageGermAppears[0] = 0.01f;

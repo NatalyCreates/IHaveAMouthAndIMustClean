@@ -17,7 +17,8 @@ public class ToothState : MonoBehaviour {
 
     void brushMe()
     {
-        if (BrushPlayer.Instance.direction.sqrMagnitude > 0)
+        Debug.Log("toothAreaEfficiency " + BrushPlayer.Instance.direction.sqrMagnitude.ToString());
+        if ((BrushPlayer.Instance.direction.sqrMagnitude > 0) && (germification > 0))
         {
             x_part = Mathf.Pow((BrushPlayer.Instance.direction.x), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
             y_part = Mathf.Pow((BrushPlayer.Instance.direction.y), 2) / BrushPlayer.Instance.direction.sqrMagnitude;
@@ -45,6 +46,7 @@ public class ToothState : MonoBehaviour {
 
         //Brush level = germ score.
         germification = germification - toothAreaEfficiency * Settings.Instance.movingCleaningEfficiency[GameManager.Instance.germPlayerScore] * Time.deltaTime;
+        germification = germification < 0 ? 0 : germification;
         Debug.Log("germification after cleaning " + germification.ToString());
 
         //report toothAreaEfficiency to BrushPlayer
