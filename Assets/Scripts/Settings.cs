@@ -77,9 +77,9 @@ public class Settings : MonoBehaviour {
         idleCleaningEfficiency[3] = 0.01f;
 
         movingCleaningEfficiency = new float[4];
-        movingCleaningEfficiency[0] = 0.35f;
-        movingCleaningEfficiency[1] = 0.5f;
-        movingCleaningEfficiency[2] = 0.5f;
+        movingCleaningEfficiency[0] = 0.45f;
+        movingCleaningEfficiency[1] = 0.6f;
+        movingCleaningEfficiency[2] = 0.6f;
         // same as the last level to prevent IndexOutOfRange
         movingCleaningEfficiency[3] = 0.5f;
 
