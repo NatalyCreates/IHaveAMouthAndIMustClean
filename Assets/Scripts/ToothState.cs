@@ -8,6 +8,7 @@ public class ToothState : MonoBehaviour {
     internal float x_part = 0f;
     internal float y_part = 0f;
     internal float toothAreaEfficiency = 0f;
+    public float toughness;
 
 
     public enum PrefBrushDir { UpDown, LeftRight };

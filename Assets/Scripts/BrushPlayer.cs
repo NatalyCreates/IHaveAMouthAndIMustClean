@@ -38,19 +38,19 @@ public class BrushPlayer : MonoBehaviour {
         direction.x = Input.GetAxis("Horizontal");
         direction.y = Input.GetAxis("Vertical");
 
-        if ((direction.x < 0) && (transform.position.x < -500))
+        if ((direction.x < 0) && (transform.position.x < -900))
         {
             direction.x = 0;
         }
-        if ((direction.x > 0) && (transform.position.x > 500))
+        if ((direction.x > 0) && (transform.position.x > 800))
         {
             direction.x = 0;
         }
-        if ((direction.y < 0) && (transform.position.y < -500))
+        if ((direction.y < 0) && (transform.position.y < -320))
         {
             direction.y = 0;
         }
-        if ((direction.y > 0) && (transform.position.y > 500))
+        if ((direction.y > 0) && (transform.position.y > 470))
         {
             direction.y = 0;
         }
