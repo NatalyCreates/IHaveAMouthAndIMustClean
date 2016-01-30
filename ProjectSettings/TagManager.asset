@@ -12,6 +12,8 @@ TagManager:
   - cooldown_bar_fill
   - efficiency_bar_fill
   - all_teeth
+  - brush_level_bar
+  - germ_level_bar
   layers:
   - Default
   - TransparentFX
@@ -51,6 +53,9 @@ TagManager:
     locked: 0
   - name: Teeth
     uniqueID: 3987360173
+    locked: 0
+  - name: CavityMid
+    uniqueID: 2707174081
     locked: 0
   - name: Cavity
     uniqueID: 3044659653
