@@ -42,11 +42,11 @@ public class Settings : MonoBehaviour {
         Instance = this;
 
         secondsUntilCavityAtMaxGerms = new int[4];
-        secondsUntilCavityAtMaxGerms[0] = 15;
-        secondsUntilCavityAtMaxGerms[1] = 15;
-        secondsUntilCavityAtMaxGerms[2] = 12;
+        secondsUntilCavityAtMaxGerms[0] = 12;
+        secondsUntilCavityAtMaxGerms[1] = 12;
+        secondsUntilCavityAtMaxGerms[2] = 9;
         // same as the last level to prevent IndexOutOfRange
-        secondsUntilCavityAtMaxGerms[3] = 10;
+        secondsUntilCavityAtMaxGerms[3] = 9;
 
         numClicksUntilMaxGerms = new int[4];
         numClicksUntilMaxGerms[0] = 7;
@@ -58,9 +58,9 @@ public class Settings : MonoBehaviour {
         maxSpeedBrush = new int[4];
         maxSpeedBrush[0] = 800;
         maxSpeedBrush[1] = 800;
-        maxSpeedBrush[2] = 1200;
+        maxSpeedBrush[2] = 1600;
         // same as the last level to prevent IndexOutOfRange
-        maxSpeedBrush[3] = 1200;
+        maxSpeedBrush[3] = 1600;
 
         germClickCooldownTime = new float[4];
         germClickCooldownTime[0] = 0.5f;
