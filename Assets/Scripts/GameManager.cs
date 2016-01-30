@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour {
     bool brushWon = false;
     bool germWon = false;
 
+    bool timesUpSoundPlaying = false;
+
+    public bool totalGameOver = false;
+
     void Awake()
     {
         Instance = this;
@@ -38,6 +42,8 @@ public class GameManager : MonoBehaviour {
         brushLevelUp = GameObject.FindGameObjectWithTag("brush_level_up").GetComponent<Image>();
         germLevelUp = GameObject.FindGameObjectWithTag("germ_level_up").GetComponent<Image>();
 
+        timesUpSoundPlaying = false;
+        totalGameOver = false;
     }
 	
 	// Update is called once per frame
@@ -59,6 +65,12 @@ public class GameManager : MonoBehaviour {
         }
 
         timeLeftThisRound = Settings.Instance.roundTime - timePlayedThisRound;
+
+        if ((timeLeftThisRound <= 5f) && (!timesUpSoundPlaying))
+        {
+            SoundManager.Instance.PlayTimesUpSound();
+            timesUpSoundPlaying = true;
+        }
 
         // count until max round time and check winner
 
@@ -111,10 +123,12 @@ public class GameManager : MonoBehaviour {
     {
         if (brushWins)
         {
+            totalGameOver = true;
             brushPlayerScore += 1;
         }
         else
         {
+            totalGameOver = true;
             germPlayerScore += 1;
         }
 
@@ -149,8 +163,8 @@ public class GameManager : MonoBehaviour {
             //reset cooldown bar to the new level clickCooldownTime
             GermPlayer.Instance.reset();
             //set brush speed to 0
-            
         }
+        timesUpSoundPlaying = false;
     }
 
     // endgame (call func if cavity or if time out) with winner flag -done

@@ -45,38 +45,53 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        int minutes = GameManager.Instance.timeLeftThisRound / 60;
-        int seconds = GameManager.Instance.timeLeftThisRound % 60;
-        timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        if (GameManager.Instance.totalGameOver)
+        {
+            timerText.text = "00:00";
+
+            cooldownBar.fillAmount = 0f;
+            efficiencyBar.fillAmount = 0f;
+        }
+        else
+        {
+            int minutes = GameManager.Instance.timeLeftThisRound / 60;
+            int seconds = GameManager.Instance.timeLeftThisRound % 60;
+            timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+
+            float fillCooldown = 0.03f + GermPlayer.Instance.cooldown / GermPlayer.Instance.clickCooldownTime;
+            if (fillCooldown > 1f) fillCooldown = 1f;
+            cooldownBar.fillAmount = fillCooldown;
+
+
+            float fillEfficiency = 0.03f + BrushPlayer.Instance.efficiency;
+            if (fillEfficiency > 1f) fillEfficiency = 1f;
+            //        efficiencyBar.fillAmount = fillEfficiency;
+            //efficiencyBar.fillAmount = Mathf.Lerp(prev_efficiency, fillEfficiency, Settings.Instance.barMoveSpeed);
+
+            for (var i = 0; i < (prev_array_length - 1); i++)
+            {
+                prev_efficiency_array[i] = prev_efficiency_array[i + 1];
+            }
+            prev_efficiency_array[prev_array_length - 1] = fillEfficiency;
+
+            sum = 0;
+            for (var i = 0; i < prev_array_length; i++)
+            {
+                sum += prev_efficiency_array[i];
+            }
+            fillEfficiency_avg = sum / prev_array_length;
+            //Debug.Log("prev_efficiency_array: " + prev_efficiency_array.ToString());
+
+            efficiencyBar.fillAmount = Mathf.Lerp(prev_efficiency, fillEfficiency_avg, Time.time);
+            prev_efficiency = fillEfficiency_avg;
+            
+
+        }
+
+        
 
         brushScoreText.text = GameManager.Instance.brushPlayerScore.ToString();
         germScoreText.text = GameManager.Instance.germPlayerScore.ToString();
-
-        float fillCooldown = 0.03f + GermPlayer.Instance.cooldown / GermPlayer.Instance.clickCooldownTime;
-        if (fillCooldown > 1f) fillCooldown = 1f;
-        cooldownBar.fillAmount = fillCooldown;
-
-        float fillEfficiency = 0.03f + BrushPlayer.Instance.efficiency;
-        if (fillEfficiency > 1f) fillEfficiency = 1f;
-        //        efficiencyBar.fillAmount = fillEfficiency;
-        //efficiencyBar.fillAmount = Mathf.Lerp(prev_efficiency, fillEfficiency, Settings.Instance.barMoveSpeed);
-
-        for (var i = 0; i < (prev_array_length-1); i++)
-        {
-            prev_efficiency_array[i] = prev_efficiency_array[i + 1];
-        }
-        prev_efficiency_array[prev_array_length-1] = fillEfficiency;
-
-        sum = 0;
-        for (var i = 0; i < prev_array_length; i++)
-        {
-            sum += prev_efficiency_array[i];
-        }
-        fillEfficiency_avg = sum / prev_array_length;
-        //Debug.Log("prev_efficiency_array: " + prev_efficiency_array.ToString());
-
-        efficiencyBar.fillAmount = Mathf.Lerp(prev_efficiency, fillEfficiency_avg, Time.time);
-        prev_efficiency = fillEfficiency_avg;
 
         float germPlayerFill = 0f;
         float brushPlayerFill = 0f;
@@ -109,6 +124,8 @@ public class UIManager : MonoBehaviour {
 
         brushLevelBar.fillAmount = brushPlayerFill;
         germLevelBar.fillAmount = germPlayerFill;
+
+
 
     }
 }
