@@ -19,6 +19,8 @@ public class BrushPlayer : MonoBehaviour {
     internal int non_zero_efficiencies;
     internal float total_efficiency;
 
+    internal bool isBrushing;
+
     internal float[] affectedToothAreasEfficiencies;
 
     void Awake()
@@ -59,22 +61,25 @@ public class BrushPlayer : MonoBehaviour {
         direction_normalized = direction.normalized;
         //Debug.Log("IHAMAIMC direction vector " + direction.ToString());
 
-        if ((direction.x < 0) && ((prev_direction.x == 0) || (prev_direction.x > 0)))
-        {
-            //Play brush left
-        }
-        if ((direction.x > 0) && ((prev_direction.x == 0) || (prev_direction.x < 0)))
-        {
-            //Play brush right
-        }
-        if ((direction.y < 0) && ((prev_direction.y == 0) || (prev_direction.y > 0)))
-        {
-            //Play brush down
-        }
-        if ((direction.y > 0) && ((prev_direction.y == 0) || (prev_direction.y < 0)))
-        {
-            //Play brush up
-        }
+       // if (isBrushing == true)
+       // {
+            if ((direction.x < 0) && ((prev_direction.x == 0) || (prev_direction.x > 0)))
+            {
+                SoundManager.Instance.PlayBrushLeftSound();
+            }
+            if ((direction.x > 0) && ((prev_direction.x == 0) || (prev_direction.x < 0)))
+            {
+                SoundManager.Instance.PlayBrushRightSound();
+            }
+            if ((direction.y < 0) && ((prev_direction.y == 0) || (prev_direction.y > 0)))
+            {
+                SoundManager.Instance.PlayBrushDownSound();
+            }
+            if ((direction.y > 0) && ((prev_direction.y == 0) || (prev_direction.y < 0)))
+            {
+                SoundManager.Instance.PlayBrushUpSound();
+            }
+       // }
 
         curMaxSpeed = Settings.Instance.maxSpeedBrush[GameManager.Instance.germPlayerScore];
         transform.Translate(direction_normalized.x * curMaxSpeed * Time.deltaTime, direction_normalized.y * curMaxSpeed * Time.deltaTime, 0);
@@ -126,10 +131,29 @@ public class BrushPlayer : MonoBehaviour {
 
     }
 
-//    public void AddAreaToCount(float efficiency)
-//    {
-//        // adds to the list
-//    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "all_teeth")
+        {
+            Debug.Log("isBrushing");
+            isBrushing = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "all_teeth")
+        {
+            Debug.Log("isNotBrushing");
+            isBrushing = false;
+           
+        }
+    }
+
+    //    public void AddAreaToCount(float efficiency)
+    //    {
+    //        // adds to the list
+    //    }
 
 
 
