@@ -83,6 +83,7 @@ public class BrushPlayer : MonoBehaviour {
             }
         }
         efficiency = total_efficiency / non_zero_efficiencies;
+
     }
 
 //    public void AddAreaToCount(float efficiency)

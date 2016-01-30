@@ -47,13 +47,8 @@ public class UIManager : MonoBehaviour {
         cooldownBar.fillAmount = fillCooldown;
 
         float fillEfficiency = 0.03f + BrushPlayer.Instance.efficiency;
-        if (fillEfficiency > 1f) fillCooldown = 1f;
+        if (fillEfficiency > 1f) fillEfficiency = 1f;
         efficiencyBar.fillAmount = fillEfficiency;
-
-        if (GameManager.Instance.brushPlayerScore == 0)
-        {
-
-        }
 
         float germPlayerFill = 0f;
         float brushPlayerFill = 0f;
