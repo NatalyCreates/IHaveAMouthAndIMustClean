@@ -123,12 +123,10 @@ public class GameManager : MonoBehaviour {
     {
         if (brushWins)
         {
-            totalGameOver = true;
             brushPlayerScore += 1;
         }
         else
         {
-            totalGameOver = true;
             germPlayerScore += 1;
         }
 
@@ -137,14 +135,14 @@ public class GameManager : MonoBehaviour {
         if (brushPlayerScore >= 3)
         {
             // brush won overall
-
+            totalGameOver = true;
             // back to menu screen
             brushWon = true;
         }
         if (germPlayerScore >= 3)
         {
             // germs won overall
-
+            totalGameOver = true;
             // back to menu screen
             germWon = true;
         }
