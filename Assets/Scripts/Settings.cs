@@ -58,9 +58,9 @@ public class Settings : MonoBehaviour {
         maxSpeedBrush = new int[4];
         maxSpeedBrush[0] = 800;
         maxSpeedBrush[1] = 800;
-        maxSpeedBrush[2] = 1600;
+        maxSpeedBrush[2] = 1300;
         // same as the last level to prevent IndexOutOfRange
-        maxSpeedBrush[3] = 1600;
+        maxSpeedBrush[3] = 1300;
 
         germClickCooldownTime = new float[4];
         germClickCooldownTime[0] = 0.5f;
