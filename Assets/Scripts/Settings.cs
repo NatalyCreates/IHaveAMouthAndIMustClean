@@ -25,7 +25,7 @@ public class Settings : MonoBehaviour {
     public int[] secondsUntilCavityAtMaxGerms;
     public int[] numClicksUntilMaxGerms;
 
-    public float rateOfMultiplicationPerSecondPerGermification = 0.1f;
+    public float rateOfMultiplicationPerSecondPerGermification = 0.05f;
 
     public int[] maxSpeedBrush;
 
@@ -35,7 +35,7 @@ public class Settings : MonoBehaviour {
 
     public float[] idleCleaningEfficiency;
     public float[] movingCleaningEfficiency;
-    internal float inefficientCleaningCoefficient = 0.3f;
+    internal float inefficientCleaningCoefficient = 0.7f;
 
     void Awake ()
     {
@@ -49,11 +49,11 @@ public class Settings : MonoBehaviour {
         secondsUntilCavityAtMaxGerms[3] = 7;
 
         numClicksUntilMaxGerms = new int[4];
-        numClicksUntilMaxGerms[0] = 7;
-        numClicksUntilMaxGerms[1] = 7;
-        numClicksUntilMaxGerms[2] = 7;
+        numClicksUntilMaxGerms[0] = 4;
+        numClicksUntilMaxGerms[1] = 4;
+        numClicksUntilMaxGerms[2] = 4;
         // same as the last level to prevent IndexOutOfRange
-        numClicksUntilMaxGerms[3] = 7;
+        numClicksUntilMaxGerms[3] = 4;
 
         maxSpeedBrush = new int[4];
         maxSpeedBrush[0] = 800;
@@ -63,16 +63,16 @@ public class Settings : MonoBehaviour {
         maxSpeedBrush[3] = 1300;
 
         germClickCooldownTime = new float[4];
-        germClickCooldownTime[0] = 0.5f;
-        germClickCooldownTime[1] = 0.35f;
-        germClickCooldownTime[2] = 0.35f;
+        germClickCooldownTime[0] = 1.1f;
+        germClickCooldownTime[1] = 0.8f;
+        germClickCooldownTime[2] = 0.8f;
         // same as the last level to prevent IndexOutOfRange
-        germClickCooldownTime[3] = 0.7f;
+        germClickCooldownTime[3] = 0.8f;
 
         idleCleaningEfficiency = new float[4];
         idleCleaningEfficiency[0] = 0;
-        idleCleaningEfficiency[1] = 0.005f;
-        idleCleaningEfficiency[2] = 0.01f;
+        idleCleaningEfficiency[1] = 0.0f;
+        idleCleaningEfficiency[2] = 0.0f;
         // same as the last level to prevent IndexOutOfRange
         idleCleaningEfficiency[3] = 0.01f;
 

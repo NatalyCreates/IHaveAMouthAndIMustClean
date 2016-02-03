@@ -28,7 +28,8 @@ public class ToothState : MonoBehaviour {
 
             if (PrefBrushDir.LeftRight == prefDir)
             {
-                toothAreaEfficiency = x_part + (y_part * Settings.Instance.inefficientCleaningCoefficient);
+                //toothAreaEfficiency = x_part + (y_part * Settings.Instance.inefficientCleaningCoefficient);
+                toothAreaEfficiency = 1;
             }
             else if (PrefBrushDir.UpDown == prefDir)
             {
@@ -88,7 +89,8 @@ public class ToothState : MonoBehaviour {
         {
             SoundManager.Instance.PlayGermifySound();
             // Germ Me, considering my toughness
-            germification += (1f/Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore])/toughness;
+            //germification += (1f/Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore])/toughness;
+            germification += (1f / Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore]);
             GermPlayer.Instance.cooldown = 0f;
         }
 
@@ -113,7 +115,7 @@ public class ToothState : MonoBehaviour {
 
         // Update damage from germs
 
-        hp = hp - (germification * Settings.Instance.dmgPerSecAtMaxGermification * Time.deltaTime);
+        hp = hp - (germification * Settings.Instance.dmgPerSecAtMaxGermification * Time.deltaTime)/toughness;
         //hp = hp - (germification * 1 * Time.deltaTime);
         //Debug.Log("IHAMAIMC hp " + hp.ToString());
         if ((GameManager.Instance.totalGameOver) || (GameManager.Instance.germLevelAnimPlaying) || (GameManager.Instance.brushLevelAnimPlaying))
