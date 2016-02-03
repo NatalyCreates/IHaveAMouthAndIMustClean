@@ -85,7 +85,7 @@ public class ToothState : MonoBehaviour {
     void OnMouseDown()
     {
         // check if cooldown is up, do something and make cooldown 0
-        if (GermPlayer.Instance.cooldown >= Settings.Instance.germClickCooldownTime[GameManager.Instance.brushPlayerScore] - 0.12f)
+        if ((germification < 1) && (GermPlayer.Instance.cooldown >= Settings.Instance.germClickCooldownTime[GameManager.Instance.brushPlayerScore] - 0.1f))
         {
             SoundManager.Instance.PlayGermifySound();
             // Germ Me, considering my toughness
