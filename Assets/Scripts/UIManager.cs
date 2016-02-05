@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if ((GameManager.Instance.totalGameOver) || (GameManager.Instance.germLevelAnimPlaying) || (GameManager.Instance.brushLevelAnimPlaying) || (GameManager.Instance.insScreen))
+        if (Helper.Instance.IsGameStateNeedToPause())
         {
             timerText.text = "00:00";
 

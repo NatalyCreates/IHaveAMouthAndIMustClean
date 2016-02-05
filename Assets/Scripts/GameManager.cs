@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     internal int roundNumber = 1;
 
     Image brushWins, germWins, brushLevelUp, germLevelUp;
+    GameObject brushScore, germScore;
 
     Image[] insImages;
 
@@ -24,6 +25,12 @@ public class GameManager : MonoBehaviour {
     bool germWon = false;
     internal bool brushLevelAnimPlaying = false;
     internal bool germLevelAnimPlaying = false;
+
+    internal bool brushScoreAnimPlayingGrow = false;
+    internal bool brushScoreAnimPlayingShrink = false;
+    internal bool germScoreAnimPlayingGrow = false;
+    internal bool germScoreAnimPlayingShrink = false;
+
 
     bool timesUpSoundPlaying = false;
 
@@ -48,6 +55,8 @@ public class GameManager : MonoBehaviour {
         germWins = GameObject.FindGameObjectWithTag("germ_wins").GetComponent<Image>();
         brushLevelUp = GameObject.FindGameObjectWithTag("brush_level_up").GetComponent<Image>();
         germLevelUp = GameObject.FindGameObjectWithTag("germ_level_up").GetComponent<Image>();
+        brushScore = GameObject.FindGameObjectWithTag("brush_score_text");
+        germScore = GameObject.FindGameObjectWithTag("germ_score_text");
 
         insImages = new Image[4];
         insImages[0] = GameObject.FindGameObjectsWithTag("ins")[0].GetComponent<Image>();
@@ -74,7 +83,7 @@ public class GameManager : MonoBehaviour {
             Application.LoadLevel("Menu");
         }
 
-        if ((totalGameOver) || (germLevelAnimPlaying) || (brushLevelAnimPlaying) || (insScreen))
+        if (Helper.Instance.IsGameStateNeedToPause())
         {
             timePlayedThisRound = 0;
             lastRoundStartedTime = (int)Time.time;
@@ -127,6 +136,22 @@ public class GameManager : MonoBehaviour {
         {
             InsFadeOut();
         }
+        if (brushScoreAnimPlayingGrow)
+        {
+            ShowBrushScoreAnimGrow();
+        }
+        if (germScoreAnimPlayingGrow)
+        {
+            ShowGermScoreAnimGrow();
+        }
+        if (brushScoreAnimPlayingShrink)
+        {
+            ShowBrushScoreAnimShrink();
+        }
+        if (germScoreAnimPlayingShrink)
+        {
+            ShowGermScoreAnimShrink();
+        }
     }
 
     void ShowBrushWinAnim()
@@ -159,6 +184,50 @@ public class GameManager : MonoBehaviour {
             // fade in ended
             insScreen = false;
             // start game
+        }
+    }
+
+    void ShowBrushScoreAnimGrow()
+    {
+        brushScore.transform.localScale = Vector2.Lerp(new Vector2(brushScore.transform.localScale.x, brushScore.transform.localScale.y), new Vector2(1.5f, 1.5f), 2f * Time.deltaTime);
+        if ((brushScore.transform.localScale.x >= 1.49f) && (brushScore.transform.localScale.y >= 1.49f))
+        {
+            // grow ended
+            brushScoreAnimPlayingShrink = true;
+            brushScoreAnimPlayingGrow = false;
+        }
+    }
+
+    void ShowGermScoreAnimGrow()
+    {
+        germScore.transform.localScale = Vector2.Lerp(new Vector2(germScore.transform.localScale.x, germScore.transform.localScale.y), new Vector2(1.5f, 1.5f), 2f * Time.deltaTime);
+        if ((germScore.transform.localScale.x >= 1.49f) && (germScore.transform.localScale.y >= 1.49f))
+        {
+            // grow ended
+            germScoreAnimPlayingShrink = true;
+            germScoreAnimPlayingGrow = false;
+        }
+    }
+
+    void ShowBrushScoreAnimShrink()
+    {
+        brushScore.transform.localScale = Vector2.Lerp(new Vector2(brushScore.transform.localScale.x, brushScore.transform.localScale.y), new Vector2(1f, 1f), 2f * Time.deltaTime);
+        if ((brushScore.transform.localScale.x <= 1.02f) && (brushScore.transform.localScale.y <= 1.02f))
+        {
+            // shrink ended
+            germLevelAnimPlaying = true;
+            brushScoreAnimPlayingShrink = false;
+        }
+    }
+
+    void ShowGermScoreAnimShrink()
+    {
+        germScore.transform.localScale = Vector2.Lerp(new Vector2(germScore.transform.localScale.x, germScore.transform.localScale.y), new Vector2(1f, 1f), 2f * Time.deltaTime);
+        if ((germScore.transform.localScale.x <= 1.02f) && (germScore.transform.localScale.y <= 1.02f))
+        {
+            // shrink ended
+            brushLevelAnimPlaying = true;
+            germScoreAnimPlayingShrink = false;
         }
     }
 
@@ -217,6 +286,7 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame (bool brushWins)
     {
+        Debug.Log("called EndGame with brushWins = " + brushWins.ToString());
         if (brushWins)
         {
             brushPlayerScore += 1;
@@ -244,8 +314,8 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            if (brushWins) germLevelAnimPlaying = true;
-            else brushLevelAnimPlaying = true;
+            if (brushWins) brushScoreAnimPlayingGrow = true;
+            else germScoreAnimPlayingGrow = true;
         }
         timesUpSoundPlaying = false;
     }

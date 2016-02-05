@@ -10,6 +10,20 @@ public class Helper : MonoBehaviour {
         Instance = this;
     }
 
+    public bool IsGameStateNeedToPause()
+    {
+        if (GameManager.Instance.germScoreAnimPlayingGrow || GameManager.Instance.germScoreAnimPlayingShrink || GameManager.Instance.germLevelAnimPlaying ||
+            GameManager.Instance.brushScoreAnimPlayingGrow || GameManager.Instance.brushScoreAnimPlayingShrink || GameManager.Instance.brushLevelAnimPlaying
+            || GameManager.Instance.insScreen || GameManager.Instance.totalGameOver)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void Print (string text)
     {
         Debug.Log("IHAMAIMC " + text);
