@@ -16,10 +16,8 @@ public class GameManager : MonoBehaviour {
 
     internal int roundNumber = 1;
 
-    Image brushWins, germWins, brushLevelUp, germLevelUp;
+    Image brushWins, germWins, brushLevelUp, germLevelUp, insImage;
     GameObject brushScore, germScore;
-
-    Image[] insImages;
 
     bool brushWon = false;
     bool germWon = false;
@@ -30,7 +28,6 @@ public class GameManager : MonoBehaviour {
     internal bool brushScoreAnimPlayingShrink = false;
     internal bool germScoreAnimPlayingGrow = false;
     internal bool germScoreAnimPlayingShrink = false;
-
 
     bool timesUpSoundPlaying = false;
 
@@ -58,11 +55,7 @@ public class GameManager : MonoBehaviour {
         brushScore = GameObject.FindGameObjectWithTag("brush_score_text");
         germScore = GameObject.FindGameObjectWithTag("germ_score_text");
 
-        insImages = new Image[4];
-        insImages[0] = GameObject.FindGameObjectsWithTag("ins")[0].GetComponent<Image>();
-        insImages[1] = GameObject.FindGameObjectsWithTag("ins")[1].GetComponent<Image>();
-        insImages[2] = GameObject.FindGameObjectsWithTag("ins")[2].GetComponent<Image>();
-        insImages[3] = GameObject.FindGameObjectsWithTag("ins")[3].GetComponent<Image>();
+        insImage = GameObject.FindGameObjectWithTag("ins").GetComponent<Image>();
 
         timesUpSoundPlaying = false;
         totalGameOver = false;
@@ -174,11 +167,8 @@ public class GameManager : MonoBehaviour {
 
     void InsFadeOut()
     {
-        float aParam = Mathf.Lerp(insImages[0].color.a, 0f, Time.deltaTime * 2f);
-        insImages[0].color = new Color(1f, 1f, 1f, aParam);
-        insImages[1].color = new Color(1f, 1f, 1f, aParam);
-        insImages[2].color = new Color(1f, 1f, 1f, aParam);
-        insImages[3].color = new Color(1f, 1f, 1f, aParam);
+        float aParam = Mathf.Lerp(insImage.color.a, 0f, Time.deltaTime * 2f);
+        insImage.color = new Color(1f, 1f, 1f, aParam);
         if (aParam <= 0.05f)
         {
             // fade in ended
