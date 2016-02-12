@@ -19,6 +19,15 @@ TagManager:
   - germ_level_up
   - brush_level_up
   - ins
+  - quit_button
+  - musvol_slider
+  - musvol_curtext
+  - sfxvol_slider
+  - sfxvol_curtext
+  - bdif_slider
+  - bdif_curtext
+  - gdif_slider
+  - gdif_curtext
   layers:
   - Default
   - TransparentFX
