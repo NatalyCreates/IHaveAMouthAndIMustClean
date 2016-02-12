@@ -3,22 +3,35 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-	public void StopBrushing (){
-			Application.Quit ();
+    GameObject qb;
+
+    void Start()
+    {
+#if UNITY_WEBPLAYER || UNITY_WEBGL
+        // hide button if on web platform
+        qb = GameObject.FindGameObjectWithTag("quit_button");
+        qb.SetActive(false);
+#endif
+
+    }
+
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
+
+    public void StopBrushing ()
+    {
+			Application.Quit();
 	}
 
-	public void StartGame(){
-		Application.LoadLevel ("mouth");
+	public void StartGame()
+    {
+		Application.LoadLevel("mouth");
 	}
-
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    
 }
