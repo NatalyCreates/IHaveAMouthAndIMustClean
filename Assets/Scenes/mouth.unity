@@ -3590,7 +3590,7 @@ MonoBehaviour:
   brushRightClip: {fileID: 8300000, guid: c82dfa01802576642998f4bc12094471, type: 3}
   brushLeftClip: {fileID: 8300000, guid: 5a514c5a5d932db449b36f01dc30e7d9, type: 3}
   timesUpClip: {fileID: 8300000, guid: 0926bb89e4311d34cb86028fd77606e5, type: 3}
-  roundOverClip: {fileID: 8300000, guid: 54531fa4f53da0841aa4cc69c531457c, type: 3}
+  roundOverClip: {fileID: 8300000, guid: 218e0ceb18d26174cbbd96bbdcb3fea5, type: 3}
 --- !u!1001 &1278275963
 Prefab:
   m_ObjectHideFlags: 0

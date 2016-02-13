@@ -210,7 +210,6 @@ public class GameManager : MonoBehaviour {
             brushScoreAnimPlayingGrow = false;
             brushScore.transform.localScale = new Vector2(1.5f, 1.5f);
             brushScore.GetComponent<Text>().color = Color.red;
-            SoundManager.Instance.PlayRoundOverSound();
         }
     }
 
@@ -225,7 +224,6 @@ public class GameManager : MonoBehaviour {
             germScoreAnimPlayingGrow = false;
             germScore.transform.localScale = new Vector2(1.5f, 1.5f);
             germScore.GetComponent<Text>().color = Color.red;
-            SoundManager.Instance.PlayRoundOverSound();
         }
     }
 
@@ -298,6 +296,12 @@ public class GameManager : MonoBehaviour {
             StartCoroutine(BackToMainMenu());
         }
     }
+    
+    IEnumerator PROS()
+    {
+        yield return new WaitForSeconds(1f);
+        SoundManager.Instance.PlayRoundOverSound();
+    }
 
     IEnumerator BackToMainMenu()
     {
@@ -312,6 +316,7 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame (bool brushWins)
     {
+        StartCoroutine(PROS());
         timesUpSoundPlaying = false;
         Debug.Log("called EndGame with brushWins = " + brushWins.ToString());
         if (brushWins)
