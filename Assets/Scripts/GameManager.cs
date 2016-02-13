@@ -269,7 +269,6 @@ public class GameManager : MonoBehaviour {
             brushLevelUp.color = new Color(1f, 1f, 1f, 0f);
             germLevelUp.transform.localPosition = new Vector2(0f, -600f);
             germLevelUp.color = new Color(1f, 1f, 1f, 0f);
-            timesUpSoundPlaying = false;
         }
     }
 
@@ -285,7 +284,6 @@ public class GameManager : MonoBehaviour {
             brushLevelUp.color = new Color(1f, 1f, 1f, 0f);
             germLevelUp.transform.localPosition = new Vector2(0f, -600f);
             germLevelUp.color = new Color(1f, 1f, 1f, 0f);
-            timesUpSoundPlaying = false;
         }
     }
 
@@ -314,7 +312,7 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame (bool brushWins)
     {
-        timesUpSoundPlaying = true;
+        timesUpSoundPlaying = false;
         Debug.Log("called EndGame with brushWins = " + brushWins.ToString());
         if (brushWins)
         {
