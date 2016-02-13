@@ -33,6 +33,14 @@ public class SoundManager : MonoBehaviour {
         {
             musicObj.volume = 0;
         }
+        else if (GameManager.Instance.gamePaused)
+        {
+            musicObj.volume = 0;
+        }
+        else if (Helper.Instance.IsGameStateNeedToPause())
+        {
+            musicObj.volume = 0;
+        }
         else
         {
             musicObj.volume = 0.25f * mvol / 100;
