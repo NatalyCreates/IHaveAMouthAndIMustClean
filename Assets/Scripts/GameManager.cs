@@ -81,6 +81,14 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            if (insScreen)
+            {
+                fadingIns = true;
+            }
+        }
+
         if (Input.GetKeyUp(KeyCode.P))
         {
             if (gamePaused)
@@ -147,7 +155,7 @@ public class GameManager : MonoBehaviour {
             germLevelUp.color = new Color(1f, 1f, 1f, 1f);
             ShowGermLevelUpAnim();
         }
-        if (fadingIns)
+        if (fadingIns && insScreen)
         {
             InsFadeOut();
         }
@@ -183,25 +191,28 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator INSSSS()
     {
-        yield return new WaitForSeconds(4f);
-        fadingIns = true;
+        yield return new WaitForSeconds(20f);
+        if (insScreen) fadingIns = true;
     }
 
     void InsFadeOut()
     {
-        float aParam = Mathf.Lerp(insImage.color.a, 0f, Time.deltaTime * 2f);
+        float aParam = Mathf.Lerp(insImage.color.a, 0f, Time.deltaTime * 2.5f);
         insImage.color = new Color(1f, 1f, 1f, aParam);
-        if (aParam <= 0.05f)
+        if (aParam <= 0.02f)
         {
+            aParam = 0;
+            insImage.color = new Color(1f, 1f, 1f, aParam);
             // fade in ended
             insScreen = false;
             // start game
+            fadingIns = false;
         }
     }
 
     void ShowBrushScoreAnimGrow()
     {
-        brushScore.GetComponent<Text>().color = Color.Lerp(brushScore.GetComponent<Text>().color, Color.red, 2f * Time.deltaTime);
+        brushScore.GetComponent<Text>().color = Color.Lerp(brushScore.GetComponent<Text>().color, Color.red, 2.5f * Time.deltaTime);
         brushScore.transform.localScale = Vector2.Lerp(new Vector2(brushScore.transform.localScale.x, brushScore.transform.localScale.y), new Vector2(1.5f, 1.5f), 2f * Time.deltaTime);
         if ((brushScore.transform.localScale.x >= 1.49f) && (brushScore.transform.localScale.y >= 1.49f))
         {
@@ -215,7 +226,7 @@ public class GameManager : MonoBehaviour {
 
     void ShowGermScoreAnimGrow()
     {
-        germScore.GetComponent<Text>().color = Color.Lerp(germScore.GetComponent<Text>().color, Color.red, 2f * Time.deltaTime);
+        germScore.GetComponent<Text>().color = Color.Lerp(germScore.GetComponent<Text>().color, Color.red, 2.5f * Time.deltaTime);
         germScore.transform.localScale = Vector2.Lerp(new Vector2(germScore.transform.localScale.x, germScore.transform.localScale.y), new Vector2(1.5f, 1.5f), 2f * Time.deltaTime);
         if ((germScore.transform.localScale.x >= 1.49f) && (germScore.transform.localScale.y >= 1.49f))
         {
@@ -229,7 +240,7 @@ public class GameManager : MonoBehaviour {
 
     void ShowBrushScoreAnimShrink()
     {
-        brushScore.GetComponent<Text>().color = Color.Lerp(brushScore.GetComponent<Text>().color, brushScoreOrigCol, 2f * Time.deltaTime);
+        brushScore.GetComponent<Text>().color = Color.Lerp(brushScore.GetComponent<Text>().color, brushScoreOrigCol, 2.5f * Time.deltaTime);
         brushScore.transform.localScale = Vector2.Lerp(new Vector2(brushScore.transform.localScale.x, brushScore.transform.localScale.y), new Vector2(1f, 1f), 2f * Time.deltaTime);
         if ((brushScore.transform.localScale.x <= 1.02f) && (brushScore.transform.localScale.y <= 1.02f))
         {
@@ -243,7 +254,7 @@ public class GameManager : MonoBehaviour {
 
     void ShowGermScoreAnimShrink()
     {
-        germScore.GetComponent<Text>().color = Color.Lerp(germScore.GetComponent<Text>().color, germScoreOrigCol, 2f * Time.deltaTime);
+        germScore.GetComponent<Text>().color = Color.Lerp(germScore.GetComponent<Text>().color, germScoreOrigCol, 2.5f * Time.deltaTime);
         germScore.transform.localScale = Vector2.Lerp(new Vector2(germScore.transform.localScale.x, germScore.transform.localScale.y), new Vector2(1f, 1f), 2f * Time.deltaTime);
         if ((germScore.transform.localScale.x <= 1.02f) && (germScore.transform.localScale.y <= 1.02f))
         {
@@ -257,7 +268,7 @@ public class GameManager : MonoBehaviour {
 
     void ShowBrushLevelUpAnim()
     {
-        brushLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(brushLevelUp.transform.localPosition.x, brushLevelUp.transform.localPosition.y), new Vector2(-605f, 305f), 2.6f * Time.deltaTime);
+        brushLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(brushLevelUp.transform.localPosition.x, brushLevelUp.transform.localPosition.y), new Vector2(-605f, 305f), 2.8f * Time.deltaTime);
         if ((brushLevelUp.transform.localPosition.x <= -600f) && (brushLevelUp.transform.localPosition.y <= 300f))
         {
             // move ended
@@ -272,7 +283,7 @@ public class GameManager : MonoBehaviour {
 
     void ShowGermLevelUpAnim()
     {
-        germLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(germLevelUp.transform.localPosition.x, germLevelUp.transform.localPosition.y), new Vector2(605f, 305f), 2.6f * Time.deltaTime);
+        germLevelUp.transform.localPosition = Vector2.Lerp(new Vector2(germLevelUp.transform.localPosition.x, germLevelUp.transform.localPosition.y), new Vector2(605f, 305f), 2.8f * Time.deltaTime);
         if ((germLevelUp.transform.localPosition.x >= 600f) && (germLevelUp.transform.localPosition.y <= 300f))
         {
             // move ended
