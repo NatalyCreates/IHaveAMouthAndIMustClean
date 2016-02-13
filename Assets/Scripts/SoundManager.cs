@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour {
 
         mvol = PlayerPrefs.GetFloat("Settings_musicVolume", 60.0f);
         musicObj = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
-        musicObj.volume = 0.20f * mvol / 100;
+        musicObj.volume = 0.2f * mvol / 100;
 
         vol = PlayerPrefs.GetFloat("Settings_sfxVolume", 90.0f) * 1.0f / 100;
 
@@ -39,11 +39,11 @@ public class SoundManager : MonoBehaviour {
         }
         else if (Helper.Instance.IsGameStateNeedToPause())
         {
-            musicObj.volume = 0;
+            musicObj.volume = 0.2f * mvol / 100;
         }
         else
         {
-            musicObj.volume = 0.25f * mvol / 100;
+            musicObj.volume = 0.2f * mvol / 100;
         }
 	}
 
