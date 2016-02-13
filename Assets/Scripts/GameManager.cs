@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance;
 
+    Color brushScoreOrigCol, germScoreOrigCol;
+
     internal int brushPlayerScore = 0;
     internal int germPlayerScore = 0;
 
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour {
     internal bool germScoreAnimPlayingGrow = false;
     internal bool germScoreAnimPlayingShrink = false;
 
-    bool timesUpSoundPlaying = false;
+    internal bool timesUpSoundPlaying = false;
 
     public bool totalGameOver = false;
     public bool insScreen = true;
@@ -174,45 +176,59 @@ public class GameManager : MonoBehaviour {
 
     void ShowBrushScoreAnimGrow()
     {
+        brushScore.GetComponent<Text>().color = Color.Lerp(brushScore.GetComponent<Text>().color, Color.white, 2f * Time.deltaTime);
         brushScore.transform.localScale = Vector2.Lerp(new Vector2(brushScore.transform.localScale.x, brushScore.transform.localScale.y), new Vector2(1.5f, 1.5f), 2f * Time.deltaTime);
         if ((brushScore.transform.localScale.x >= 1.49f) && (brushScore.transform.localScale.y >= 1.49f))
         {
             // grow ended
             brushScoreAnimPlayingShrink = true;
             brushScoreAnimPlayingGrow = false;
+            brushScore.transform.localScale = new Vector2(1.5f, 1.5f);
+            brushScore.GetComponent<Text>().color = Color.white;
+            SoundManager.Instance.PlayRoundOverSound();
         }
     }
 
     void ShowGermScoreAnimGrow()
     {
+        germScore.GetComponent<Text>().color = Color.Lerp(germScore.GetComponent<Text>().color, Color.white, 2f * Time.deltaTime);
         germScore.transform.localScale = Vector2.Lerp(new Vector2(germScore.transform.localScale.x, germScore.transform.localScale.y), new Vector2(1.5f, 1.5f), 2f * Time.deltaTime);
         if ((germScore.transform.localScale.x >= 1.49f) && (germScore.transform.localScale.y >= 1.49f))
         {
             // grow ended
             germScoreAnimPlayingShrink = true;
             germScoreAnimPlayingGrow = false;
+            germScore.transform.localScale = new Vector2(1.5f, 1.5f);
+            germScore.GetComponent<Text>().color = Color.white;
+            SoundManager.Instance.PlayRoundOverSound();
         }
     }
 
     void ShowBrushScoreAnimShrink()
     {
+        brushScore.GetComponent<Text>().color = Color.Lerp(brushScore.GetComponent<Text>().color, brushScoreOrigCol, 2f * Time.deltaTime);
         brushScore.transform.localScale = Vector2.Lerp(new Vector2(brushScore.transform.localScale.x, brushScore.transform.localScale.y), new Vector2(1f, 1f), 2f * Time.deltaTime);
         if ((brushScore.transform.localScale.x <= 1.02f) && (brushScore.transform.localScale.y <= 1.02f))
         {
             // shrink ended
             germLevelAnimPlaying = true;
             brushScoreAnimPlayingShrink = false;
+            brushScore.transform.localScale = new Vector2(1f, 1f);
+            brushScore.GetComponent<Text>().color = brushScoreOrigCol;
         }
     }
 
     void ShowGermScoreAnimShrink()
     {
+        germScore.GetComponent<Text>().color = Color.Lerp(germScore.GetComponent<Text>().color, germScoreOrigCol, 2f * Time.deltaTime);
         germScore.transform.localScale = Vector2.Lerp(new Vector2(germScore.transform.localScale.x, germScore.transform.localScale.y), new Vector2(1f, 1f), 2f * Time.deltaTime);
         if ((germScore.transform.localScale.x <= 1.02f) && (germScore.transform.localScale.y <= 1.02f))
         {
             // shrink ended
             brushLevelAnimPlaying = true;
             germScoreAnimPlayingShrink = false;
+            germScore.transform.localScale = new Vector2(1f, 1f);
+            germScore.GetComponent<Text>().color = germScoreOrigCol;
         }
     }
 
@@ -228,6 +244,7 @@ public class GameManager : MonoBehaviour {
             brushLevelUp.color = new Color(1f, 1f, 1f, 0f);
             germLevelUp.transform.localPosition = new Vector2(0f, -600f);
             germLevelUp.color = new Color(1f, 1f, 1f, 0f);
+            timesUpSoundPlaying = false;
         }
     }
 
@@ -243,6 +260,7 @@ public class GameManager : MonoBehaviour {
             brushLevelUp.color = new Color(1f, 1f, 1f, 0f);
             germLevelUp.transform.localPosition = new Vector2(0f, -600f);
             germLevelUp.color = new Color(1f, 1f, 1f, 0f);
+            timesUpSoundPlaying = false;
         }
     }
 
@@ -271,6 +289,7 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame (bool brushWins)
     {
+        timesUpSoundPlaying = true;
         Debug.Log("called EndGame with brushWins = " + brushWins.ToString());
         if (brushWins)
         {
@@ -299,10 +318,18 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            if (brushWins) brushScoreAnimPlayingGrow = true;
-            else germScoreAnimPlayingGrow = true;
+            if (brushWins)
+            {
+                brushScoreAnimPlayingGrow = true;
+                brushScoreOrigCol = brushScore.GetComponent<Text>().color;
+            }
+            else
+            {
+                germScoreAnimPlayingGrow = true;
+                germScoreOrigCol = germScore.GetComponent<Text>().color;
+            }
         }
-        timesUpSoundPlaying = false;
+        
     }
 
     void ResetGame()

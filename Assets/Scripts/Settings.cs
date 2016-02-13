@@ -5,6 +5,10 @@ public class Settings : MonoBehaviour {
 
     public static Settings Instance;
 
+
+    internal int brushDifficultyOption = 2; // 1, 2, or 3
+    internal int germsDifficultyOption = 2; // 1, 2, or 3
+
     internal int roundTime = 60;
 
     public int winScore = 3;
@@ -90,13 +94,13 @@ public class Settings : MonoBehaviour {
         percentageGermAppears[2] = 0.7f;
         percentageGermAppears[3] = 1.0f;
 
+        brushDifficultyOption = (int)PlayerPrefs.GetFloat("Settings_brushDif", 2.0f);
+        germsDifficultyOption = (int)PlayerPrefs.GetFloat("Settings_germDif", 2.0f);
     }
 
     // Use this for initialization
     void Start () {
-
         
-
     }
 	
 	// Update is called once per frame

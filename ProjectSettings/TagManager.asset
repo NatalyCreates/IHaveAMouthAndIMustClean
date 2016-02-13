@@ -28,6 +28,7 @@ TagManager:
   - bdif_curtext
   - gdif_slider
   - gdif_curtext
+  - music_obj
   layers:
   - Default
   - TransparentFX
