@@ -79,7 +79,8 @@ public class SoundManager : MonoBehaviour {
 
     public void PlayRoundOverSound()
     {
-        gameObject.GetComponent<AudioSource>().PlayOneShot(roundOverClip, vol * 2.0f);
+        // Don't play until replaced by better sound
+        //gameObject.GetComponent<AudioSource>().PlayOneShot(roundOverClip, vol * 2.0f);
     }
 
 }
