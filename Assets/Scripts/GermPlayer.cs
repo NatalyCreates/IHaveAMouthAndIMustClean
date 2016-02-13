@@ -24,10 +24,17 @@ public class GermPlayer : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        // refill cooldown in time from settings
-        if (cooldown < clickCooldownTime)
+        if (GameManager.Instance.gamePaused)
         {
-            cooldown += Time.deltaTime;
+            // no refill
+        }
+        else
+        {
+            // refill cooldown in time from settings
+            if (cooldown < clickCooldownTime)
+            {
+                cooldown += Time.deltaTime;
+            }
         }
 	}
 

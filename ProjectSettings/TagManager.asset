@@ -29,6 +29,7 @@ TagManager:
   - gdif_slider
   - gdif_curtext
   - music_obj
+  - pauser
   layers:
   - Default
   - TransparentFX

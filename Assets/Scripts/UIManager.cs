@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
             Application.LoadLevel("Menu");
         }
@@ -89,8 +89,6 @@ public class UIManager : MonoBehaviour {
 
             efficiencyBar.fillAmount = Mathf.Lerp(prev_efficiency, fillEfficiency_avg, Time.time);
             prev_efficiency = fillEfficiency_avg;
-            
-
         }
 
         

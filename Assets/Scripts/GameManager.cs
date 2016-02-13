@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour {
 
     bool fadingIns = false;
 
+    internal bool gamePaused = false;
+    GameObject pauser;
+    float pauseTime = 0;
+
     void Awake()
     {
         Instance = this;
@@ -49,6 +53,10 @@ public class GameManager : MonoBehaviour {
         brushPlayerScore = 0;
         germPlayerScore = 0;
         roundNumber = 1;
+        
+        gamePaused = false;
+        pauser = GameObject.FindGameObjectWithTag("pauser");
+        pauser.SetActive(false);
 
         brushWins = GameObject.FindGameObjectWithTag("brush_wins").GetComponent<Image>();
         germWins = GameObject.FindGameObjectWithTag("germ_wins").GetComponent<Image>();
@@ -73,23 +81,40 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            if (gamePaused)
+            {
+                gamePaused = false;
+                pauser.SetActive(false);
+            }
+            else
+            {
+                if ((timeLeftThisRound > 0) && !Helper.Instance.IsGameStateNeedToPause())
+                {
+                    gamePaused = true;
+                    pauser.SetActive(true);
+                }
+            }
+        }
+
         if (Helper.Instance.IsGameStateNeedToPause())
         {
             timePlayedThisRound = 0;
             lastRoundStartedTime = (int)Time.time;
         }
+        else if (gamePaused)
+        {
+            pauseTime += Time.deltaTime;
+        }
         else
         {
-            timePlayedThisRound = (int)Time.time - lastRoundStartedTime;
-            //Helper.Instance.Print("timePlayedThisRound = " + timePlayedThisRound.ToString());
-            //Helper.Instance.Print("lastRoundStartedTime = " + lastRoundStartedTime.ToString());
-            //Helper.Instance.Print("roundTime = " + Settings.Instance.roundTime.ToString());
+            timePlayedThisRound = (int)Time.time - lastRoundStartedTime - (int)pauseTime;
 
             if (timePlayedThisRound >= Settings.Instance.roundTime + 1)
             {
                 lastRoundStartedTime = (int)Time.time;
                 timePlayedThisRound = 0;
-                //Helper.Instance.Print("time over");
                 EndGame(true);
             }
         }
@@ -176,7 +201,7 @@ public class GameManager : MonoBehaviour {
 
     void ShowBrushScoreAnimGrow()
     {
-        brushScore.GetComponent<Text>().color = Color.Lerp(brushScore.GetComponent<Text>().color, Color.white, 2f * Time.deltaTime);
+        brushScore.GetComponent<Text>().color = Color.Lerp(brushScore.GetComponent<Text>().color, Color.red, 2f * Time.deltaTime);
         brushScore.transform.localScale = Vector2.Lerp(new Vector2(brushScore.transform.localScale.x, brushScore.transform.localScale.y), new Vector2(1.5f, 1.5f), 2f * Time.deltaTime);
         if ((brushScore.transform.localScale.x >= 1.49f) && (brushScore.transform.localScale.y >= 1.49f))
         {
@@ -184,14 +209,14 @@ public class GameManager : MonoBehaviour {
             brushScoreAnimPlayingShrink = true;
             brushScoreAnimPlayingGrow = false;
             brushScore.transform.localScale = new Vector2(1.5f, 1.5f);
-            brushScore.GetComponent<Text>().color = Color.white;
+            brushScore.GetComponent<Text>().color = Color.red;
             SoundManager.Instance.PlayRoundOverSound();
         }
     }
 
     void ShowGermScoreAnimGrow()
     {
-        germScore.GetComponent<Text>().color = Color.Lerp(germScore.GetComponent<Text>().color, Color.white, 2f * Time.deltaTime);
+        germScore.GetComponent<Text>().color = Color.Lerp(germScore.GetComponent<Text>().color, Color.red, 2f * Time.deltaTime);
         germScore.transform.localScale = Vector2.Lerp(new Vector2(germScore.transform.localScale.x, germScore.transform.localScale.y), new Vector2(1.5f, 1.5f), 2f * Time.deltaTime);
         if ((germScore.transform.localScale.x >= 1.49f) && (germScore.transform.localScale.y >= 1.49f))
         {
@@ -199,7 +224,7 @@ public class GameManager : MonoBehaviour {
             germScoreAnimPlayingShrink = true;
             germScoreAnimPlayingGrow = false;
             germScore.transform.localScale = new Vector2(1.5f, 1.5f);
-            germScore.GetComponent<Text>().color = Color.white;
+            germScore.GetComponent<Text>().color = Color.red;
             SoundManager.Instance.PlayRoundOverSound();
         }
     }
@@ -320,13 +345,13 @@ public class GameManager : MonoBehaviour {
         {
             if (brushWins)
             {
-                brushScoreAnimPlayingGrow = true;
                 brushScoreOrigCol = brushScore.GetComponent<Text>().color;
+                brushScoreAnimPlayingGrow = true;
             }
             else
             {
-                germScoreAnimPlayingGrow = true;
                 germScoreOrigCol = germScore.GetComponent<Text>().color;
+                germScoreAnimPlayingGrow = true;
             }
         }
         
@@ -343,6 +368,7 @@ public class GameManager : MonoBehaviour {
         }
         //reset timer
         lastRoundStartedTime = (int)Time.time;
+        pauseTime = 0;
         timePlayedThisRound = 0;
         //reset cooldown bar to the new level clickCooldownTime
         GermPlayer.Instance.reset();

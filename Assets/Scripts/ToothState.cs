@@ -46,10 +46,13 @@ public class ToothState : MonoBehaviour {
 
         //Debug.Log("toothAreaEfficiency " + toothAreaEfficiency.ToString());
 
-        //Brush level = germ score.
-        germification = germification - toothAreaEfficiency * Settings.Instance.movingCleaningEfficiency[GameManager.Instance.germPlayerScore] * Time.deltaTime;
-        germification = germification < 0 ? 0 : germification;
-        //Debug.Log("germification after cleaning " + germification.ToString());
+        if (!GameManager.Instance.gamePaused && !Helper.Instance.IsGameStateNeedToPause())
+        {
+            //Brush level = germ score.
+            germification = germification - toothAreaEfficiency * Settings.Instance.movingCleaningEfficiency[GameManager.Instance.germPlayerScore] * Time.deltaTime;
+            germification = germification < 0 ? 0 : germification;
+            //Debug.Log("germification after cleaning " + germification.ToString());
+        }
 
         //report toothAreaEfficiency to BrushPlayer
         //Don't report - brushplayer asks us instead.
@@ -84,46 +87,49 @@ public class ToothState : MonoBehaviour {
 	
     void OnMouseDown()
     {
-        // check if cooldown is up, do something and make cooldown 0
-        if ((germification < 1) && (GermPlayer.Instance.cooldown >= Settings.Instance.germClickCooldownTime[GameManager.Instance.brushPlayerScore] - 0.1f))
+        if (!Helper.Instance.IsGameStateNeedToPause() && !GameManager.Instance.gamePaused)
         {
-            SoundManager.Instance.PlayGermifySound();
-            // Germ Me, considering my toughness
-            //germification += (1f/Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore])/toughness;
-            germification += (1f / Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore]);
-            GermPlayer.Instance.cooldown = 0f;
+            // check if cooldown is up, do something and make cooldown 0
+            if ((germification < 1) && (GermPlayer.Instance.cooldown >= Settings.Instance.germClickCooldownTime[GameManager.Instance.brushPlayerScore] - 0.1f))
+            {
+                SoundManager.Instance.PlayGermifySound();
+                // Germ Me, considering my toughness
+                //germification += (1f/Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore])/toughness;
+                germification += (1f / Settings.Instance.numClicksUntilMaxGerms[GameManager.Instance.brushPlayerScore]);
+                GermPlayer.Instance.cooldown = 0f;
+            }
         }
-
-
     }
 
     // Update is called once per frame
     void Update () {
 
-        // Germ multiplication
-
-        germification = germification * (1 + (Settings.Instance.rateOfMultiplicationPerSecondPerGermification * Time.deltaTime));
-
-        //Check that germification isn't more than max.
-        if (germification > 1f)
-        {
-            germification = 1f;
-        }
-
-        //Debug.Log("IHAMAIMC germification " + germification.ToString());
-        //Debug.Log("IHAMAIMC rate const " + Settings.Instance.dmgPerSecAtMaxGermification.ToString());
-
-        // Update damage from germs
-
-        hp = hp - (germification * Settings.Instance.dmgPerSecAtMaxGermification * Time.deltaTime)/toughness;
-        //hp = hp - (germification * 1 * Time.deltaTime);
-        //Debug.Log("IHAMAIMC hp " + hp.ToString());
-        if (Helper.Instance.IsGameStateNeedToPause())
+        
+        if (Helper.Instance.IsGameStateNeedToPause() || GameManager.Instance.gamePaused)
         {
             //nada
         }
         else
         {
+            // Germ multiplication
+
+            germification = germification * (1 + (Settings.Instance.rateOfMultiplicationPerSecondPerGermification * Time.deltaTime));
+
+            //Check that germification isn't more than max.
+            if (germification > 1f)
+            {
+                germification = 1f;
+            }
+
+            //Debug.Log("IHAMAIMC germification " + germification.ToString());
+            //Debug.Log("IHAMAIMC rate const " + Settings.Instance.dmgPerSecAtMaxGermification.ToString());
+
+            // Update damage from germs
+
+            hp = hp - (germification * Settings.Instance.dmgPerSecAtMaxGermification * Time.deltaTime) / toughness;
+            //hp = hp - (germification * 1 * Time.deltaTime);
+            //Debug.Log("IHAMAIMC hp " + hp.ToString());
+
             if (hp <= 0)
             {
                 GameManager.Instance.EndGame(false);

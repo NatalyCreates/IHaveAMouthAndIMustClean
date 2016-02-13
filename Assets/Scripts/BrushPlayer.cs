@@ -61,29 +61,6 @@ public class BrushPlayer : MonoBehaviour {
         direction_normalized = direction.normalized;
         //Debug.Log("IHAMAIMC direction vector " + direction.ToString());
 
-       // if (isBrushing == true)
-       // {
-            if ((direction.x < 0) && ((prev_direction.x == 0) || (prev_direction.x > 0)))
-            {
-                SoundManager.Instance.PlayBrushLeftSound();
-            }
-            if ((direction.x > 0) && ((prev_direction.x == 0) || (prev_direction.x < 0)))
-            {
-                SoundManager.Instance.PlayBrushRightSound();
-            }
-            if ((direction.y < 0) && ((prev_direction.y == 0) || (prev_direction.y > 0)))
-            {
-                SoundManager.Instance.PlayBrushDownSound();
-            }
-            if ((direction.y > 0) && ((prev_direction.y == 0) || (prev_direction.y < 0)))
-            {
-                SoundManager.Instance.PlayBrushUpSound();
-            }
-       // }
-
-        curMaxSpeed = Settings.Instance.maxSpeedBrush[GameManager.Instance.germPlayerScore];
-        transform.Translate(direction_normalized.x * curMaxSpeed * Time.deltaTime, direction_normalized.y * curMaxSpeed * Time.deltaTime, 0);
-
         //fractionOfMaxSpeed = ???? / curMaxSpeed;
         fractionOfMaxSpeed = 1f;
         //fractionOfMaxSpeed = direction.magnitude;
@@ -110,25 +87,60 @@ public class BrushPlayer : MonoBehaviour {
         }
         */
 
-            //Update movement according to 
+        //Update movement according to 
 
-            // Calculate Average Efficiency on all Tooth Areas that have reported
-            cur_efficiency = 0f;
+        // Calculate Average Efficiency on all Tooth Areas that have reported
+        cur_efficiency = 0f;
         total_efficiency = 0f;
         non_zero_efficiencies = 0;
         GameObject[] allTeeth = GameObject.FindGameObjectsWithTag("all_teeth");
         foreach (GameObject area in allTeeth)
         {
             cur_efficiency = area.GetComponent<ToothState>().toothAreaEfficiency;
-            if (cur_efficiency != 0) {
+            if (cur_efficiency != 0)
+            {
                 non_zero_efficiencies += 1;
                 total_efficiency += cur_efficiency;
             }
         }
         efficiency = total_efficiency / non_zero_efficiencies;
 
-        prev_direction = direction;
+        curMaxSpeed = Settings.Instance.maxSpeedBrush[GameManager.Instance.germPlayerScore];
 
+        if (GameManager.Instance.gamePaused || Helper.Instance.IsGameStateNeedToPause())
+        {
+            efficiency = 0;
+            // no sound
+            // no movement
+        }
+        else
+        {
+            // sound
+            // if (isBrushing == true)
+            // {
+            if ((direction.x < 0) && ((prev_direction.x == 0) || (prev_direction.x > 0)))
+            {
+                SoundManager.Instance.PlayBrushLeftSound();
+            }
+            if ((direction.x > 0) && ((prev_direction.x == 0) || (prev_direction.x < 0)))
+            {
+                SoundManager.Instance.PlayBrushRightSound();
+            }
+            if ((direction.y < 0) && ((prev_direction.y == 0) || (prev_direction.y > 0)))
+            {
+                SoundManager.Instance.PlayBrushDownSound();
+            }
+            if ((direction.y > 0) && ((prev_direction.y == 0) || (prev_direction.y < 0)))
+            {
+                SoundManager.Instance.PlayBrushUpSound();
+            }
+            // }
+
+            // movement
+            transform.Translate(direction_normalized.x * curMaxSpeed * Time.deltaTime, direction_normalized.y * curMaxSpeed * Time.deltaTime, 0);
+        }
+
+        prev_direction = direction;
     }
 
     void OnTriggerEnter2D(Collider2D other)
