@@ -51,6 +51,9 @@ public class Settings : MonoBehaviour {
         brushDifficultyOption = (int)PlayerPrefs.GetFloat("Settings_brushDif", 2.0f);
         germsDifficultyOption = (int)PlayerPrefs.GetFloat("Settings_germDif", 2.0f);
 
+        Debug.Log("Real brush difficulty = " + (int)PlayerPrefs.GetFloat("Settings_brushDif", 2.0f));
+        Debug.Log("Real germ difficulty = " + (int)PlayerPrefs.GetFloat("Settings_germDif", 2.0f));
+
         germ_Diff_coef = 0.5f + 0.25f * germsDifficultyOption;
         brush_Diff_coef = 0.5f + 0.25f * brushDifficultyOption;
 
